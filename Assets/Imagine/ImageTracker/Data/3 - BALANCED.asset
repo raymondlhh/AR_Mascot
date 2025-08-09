@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ac7b558fdfc4cbeb73fbdb05d0f371, type: 3}
+  m_Name: 3 - BALANCED
+  m_EditorClassIdentifier: 
+  label: BALANCED
+  color: {r: 0.7921277, g: 1, b: 0.5019608, a: 1}
+  description: '- This template is well balanced in quality vs. fps
+
+    - Best for
+    small experiences.
+
+    - Prone to skewing, when imagetarget is weak, or during
+    high motion.'
+  settings:
+    maxSimultaneousTargets: 1
+    targetFrameRate: 30
+    advancedSettings:
+      maxFrameLength: 450
+      maxFrameArea: 80
+      trackedPoints: 60
+      poseCorrectionInterval: 1500
+      detectInterval: 200
+      detectability: 0.5
+      detectZone: 0
+    useExtraSmoothing: 0
+    smoothenFactor: 10
+    debugMode: 0

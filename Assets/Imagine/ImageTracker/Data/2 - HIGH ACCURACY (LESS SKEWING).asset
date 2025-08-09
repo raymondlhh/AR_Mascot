@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ac7b558fdfc4cbeb73fbdb05d0f371, type: 3}
+  m_Name: 2 - HIGH ACCURACY (LESS SKEWING)
+  m_EditorClassIdentifier: 
+  label: HIGH ACCURACY (LESS SKEWING)
+  color: {r: 1, g: 0.6537612, b: 0, a: 1}
+  description: "- Use this template to minimize both skewing and jitter. \n- Best
+    for small experiences.\n- Target is lerped (less \"sticky\") to reduce noise
+    and jitter\n- Prone to overheating, especially on older devices\n- Lowest fps,
+    especially on older devices"
+  settings:
+    maxSimultaneousTargets: 1
+    targetFrameRate: 30
+    advancedSettings:
+      maxFrameLength: 500
+      maxFrameArea: 80
+      trackedPoints: 80
+      poseCorrectionInterval: 200
+      detectInterval: 200
+      detectability: 0.5
+      detectZone: 0
+    useExtraSmoothing: 1
+    smoothenFactor: 15
+    debugMode: 0

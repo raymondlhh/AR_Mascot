@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ac7b558fdfc4cbeb73fbdb05d0f371, type: 3}
+  m_Name: 1 - HIGH PRECISION (LOW JITTER)
+  m_EditorClassIdentifier: 
+  label: HIGH PRECISION (LOW JITTER)
+  color: {r: 1, g: 1, b: 0, a: 1}
+  description: "- Use this template to minimize jitter. \n- Best for small experiences.\n-
+    Prone to skewing, when imagetarget is weak, or during high motion.\n- Prone to
+    overheating, especially on older devices\n- Lowest fps, especially on older devices"
+  settings:
+    maxSimultaneousTargets: 1
+    targetFrameRate: 30
+    advancedSettings:
+      maxFrameLength: 500
+      maxFrameArea: 80
+      trackedPoints: 80
+      poseCorrectionInterval: 1500
+      detectInterval: 200
+      detectability: 0.5
+      detectZone: 0
+    useExtraSmoothing: 0
+    smoothenFactor: 10
+    debugMode: 0
