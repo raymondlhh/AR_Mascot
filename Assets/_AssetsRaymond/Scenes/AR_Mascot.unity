@@ -1020,10 +1020,15 @@ MonoBehaviour:
   doubleTapMaxInterval: 0.8
   enableTouchInput: 1
   enableMouseInput: 1
+  hoverTimeToGrab: 2
+  enableHoverGrab: 1
+  grabCenter: {x: 0, y: 0, z: 0}
+  grabSphereRadius: 2.2
+  parentTransform: {fileID: 817681195}
   mascotAnimations: {fileID: 0}
   interactionCollider: {fileID: 0}
   debugMode: 0
-  showDebugGizmos: 0
+  showDebugGizmos: 1
 --- !u!114 &817681197
 MonoBehaviour:
   m_ObjectHideFlags: 0

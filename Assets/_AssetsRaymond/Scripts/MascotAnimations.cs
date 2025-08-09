@@ -57,6 +57,7 @@ public class MascotAnimations : MonoBehaviour
     // Private variables
     private bool isDancing = false;
     private bool isGettingHit = false;
+    private bool isGrabbing = false;
     private int currentDanceIndex = -1;
     private Coroutine currentAnimationCoroutine;
     private AnimationType currentAnimationType = AnimationType.LookAround;
@@ -64,6 +65,7 @@ public class MascotAnimations : MonoBehaviour
     // Animation state hashes for performance
     private int isDancingHash;
     private int getHitHash;
+    private int isGrabbingHash;
     private Dictionary<string, int> animationHashes;
     
     // Animation type enum
@@ -71,7 +73,8 @@ public class MascotAnimations : MonoBehaviour
     {
         LookAround,
         Dancing,
-        GetHit
+        GetHit,
+        Grabbing
     }
     
     void Start()
@@ -97,6 +100,7 @@ public class MascotAnimations : MonoBehaviour
         // Cache animation parameter hashes for performance
         isDancingHash = Animator.StringToHash("isDancing");
         getHitHash = Animator.StringToHash("getHit");
+        isGrabbingHash = Animator.StringToHash("isGrabbing");
         
         // Initialize animation hashes
         animationHashes = new Dictionary<string, int>();
@@ -215,6 +219,53 @@ public class MascotAnimations : MonoBehaviour
     }
     
     /// <summary>
+    /// Starts the grabbing animation and state (triggered by hover)
+    /// </summary>
+    public void StartGrabbing()
+    {
+        if (animator == null)
+        {
+            Debug.LogError("MascotAnimations: Animator is null!");
+            return;
+        }
+        
+        // Stop current animation (dance or other)
+        if (currentAnimationCoroutine != null)
+        {
+            StopCoroutine(currentAnimationCoroutine);
+            currentAnimationCoroutine = null;
+        }
+        
+        // Set grabbing state
+        currentAnimationType = AnimationType.Grabbing;
+        currentDanceIndex = -1; // Reset dance index since we're not dancing
+        
+        if (debugMode)
+            Debug.Log("MascotAnimations: Starting grabbing state");
+        
+        // Set grabbing state in animator
+        SetAnimationState(AnimationType.Grabbing);
+    }
+    
+    /// <summary>
+    /// Stops the grabbing animation and returns to Look Around
+    /// </summary>
+    public void StopGrabbing()
+    {
+        if (currentAnimationType == AnimationType.Grabbing)
+        {
+            if (debugMode)
+                Debug.Log("MascotAnimations: Stopping grabbing, returning to Look Around");
+            
+            SetAnimationState(AnimationType.LookAround);
+            currentDanceIndex = -1;
+            currentAnimationType = AnimationType.LookAround;
+            
+            // No need for coroutine since grabbing doesn't have a duration
+        }
+    }
+    
+    /// <summary>
     /// Stops the current animation and returns to Look Around
     /// </summary>
     public void StopCurrentAnimation()
@@ -292,22 +343,37 @@ public class MascotAnimations : MonoBehaviour
                 case AnimationType.LookAround:
                     animator.SetBool(isDancingHash, false);
                     animator.SetBool(getHitHash, false);
+                    animator.SetBool(isGrabbingHash, false);
                     isDancing = false;
                     isGettingHit = false;
+                    isGrabbing = false;
                     break;
                     
                 case AnimationType.Dancing:
                     animator.SetBool(isDancingHash, true);
                     animator.SetBool(getHitHash, false);
+                    animator.SetBool(isGrabbingHash, false);
                     isDancing = true;
                     isGettingHit = false;
+                    isGrabbing = false;
                     break;
                     
                 case AnimationType.GetHit:
                     animator.SetBool(isDancingHash, false);
                     animator.SetBool(getHitHash, true);
+                    animator.SetBool(isGrabbingHash, false);
                     isDancing = false;
                     isGettingHit = true;
+                    isGrabbing = false;
+                    break;
+                    
+                case AnimationType.Grabbing:
+                    animator.SetBool(isDancingHash, false);
+                    animator.SetBool(getHitHash, false);
+                    animator.SetBool(isGrabbingHash, true);
+                    isDancing = false;
+                    isGettingHit = false;
+                    isGrabbing = true;
                     break;
             }
         }
@@ -411,6 +477,15 @@ public class MascotAnimations : MonoBehaviour
     public bool IsGettingHit()
     {
         return isGettingHit;
+    }
+    
+    /// <summary>
+    /// Gets the current grabbing state
+    /// </summary>
+    /// <returns>True if currently being grabbed</returns>
+    public bool IsGrabbing()
+    {
+        return isGrabbing;
     }
     
     /// <summary>
