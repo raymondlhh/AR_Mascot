@@ -56,7 +56,7 @@ public class Canvas : MonoBehaviour
     public bool enableTouchScrolling = true;
     
     [Header("Mascot Animation Control")]
-    public Mascot mascotController;
+    public MascotAnimations mascotController;
     
     [Header("Dance Buttons")]
     public Button[] danceButtons = new Button[8];
@@ -122,7 +122,7 @@ public class Canvas : MonoBehaviour
         // Auto-find mascot controller if not assigned
         if (mascotController == null)
         {
-            mascotController = FindObjectOfType<Mascot>();
+            mascotController = FindObjectOfType<MascotAnimations>();
         }
         
         if (mascotController == null)
