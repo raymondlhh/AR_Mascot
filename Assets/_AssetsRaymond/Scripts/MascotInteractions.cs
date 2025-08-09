@@ -23,12 +23,11 @@ using UnityEngine;
 /// 
 /// Usage:
 /// - Double-tap the mascot's capsule collider to trigger getHit animation
-/// - Hover over mascot for 2 seconds to start grabbing mode
-/// - Drag mascot around within sphere boundary while grabbing
-/// - Release or move outside boundary to stop grabbing and return to initial position
+/// - Hover over mascot for 2 seconds to start Floating animation (isFloating = true)
+/// - Move away from mascot to stop Floating animation (isFloating = false)
 /// - Works with both touch (mobile) and mouse input
 /// - During getHit animation, double-tap again to restart the animation
-/// - getHit and grabbing animations interrupt any dancing animations
+/// - getHit and Floating animations interrupt any dancing animations
 /// </summary>
 public class MascotInteractions : MonoBehaviour
 {
@@ -43,15 +42,8 @@ public class MascotInteractions : MonoBehaviour
     public float hoverTimeToGrab = 2.0f; // Time to hover before grabbing starts
     public bool enableHoverGrab = true;
     
-    [Header("Movement Constraints")]
-    public Vector3 grabCenter = Vector3.zero; // Center of the grab sphere (relative to initial position)
-    [Range(1.0f, 20.0f)]
-    public float grabSphereRadius = 5.0f; // Maximum distance from center
-    public Transform parentTransform; // The transform to move when grabbing
-    public bool returnToInitialPosition = true; // Return to initial position when grabbing stops
-    public bool smoothReturn = true; // Smoothly animate return to initial position
-    [Range(0.1f, 2.0f)]
-    public float returnDuration = 0.5f; // Duration of smooth return animation
+    [Header("Animation Only Settings")]
+    public bool enableGrabbingAnimation = true; // Enable Floating animation on 2-second hover
     
     [Header("Components")]
     public MascotAnimations mascotAnimations;
@@ -69,11 +61,7 @@ public class MascotInteractions : MonoBehaviour
     private bool isHovering = false;
     private float hoverStartTime = 0f;
     private bool isGrabbing = false;
-    private Vector3 initialGrabPosition;
-    private Vector3 grabOffset;
-    private Vector3 lastValidPosition;
     private Coroutine hoverCoroutine;
-    private Coroutine returnCoroutine;
     
     // Input handling
     private Camera mainCamera;
@@ -133,21 +121,9 @@ public class MascotInteractions : MonoBehaviour
             Debug.LogError("MascotInteractions: No Camera found! Touch/mouse input will not work properly.");
         }
         
-        // Auto-find parent transform if not assigned
-        if (parentTransform == null)
-        {
-            parentTransform = transform.parent;
-            if (parentTransform == null)
-                parentTransform = transform;
-        }
-        
-        // Store initial position for grab center calculation
-        initialGrabPosition = parentTransform.position;
-        lastValidPosition = parentTransform.position;
-        
         if (debugMode)
         {
-            Debug.Log($"MascotInteractions initialized. Double-tap interval: {doubleTapMaxInterval}s, Hover time: {hoverTimeToGrab}s, Grab radius: {grabSphereRadius}");
+            Debug.Log($"MascotInteractions initialized. Double-tap interval: {doubleTapMaxInterval}s, Hover time: {hoverTimeToGrab}s");
         }
     }
     
@@ -158,14 +134,7 @@ public class MascotInteractions : MonoBehaviour
     
     void HandleInput()
     {
-        // Handle grabbing movement
-        if (isGrabbing)
-        {
-            HandleGrabMovement();
-            return; // Skip other input handling while grabbing
-        }
-        
-        // Handle hover detection (only when not grabbing)
+        // Handle hover detection for floating state
         if (enableHoverGrab)
         {
             HandleHoverDetection();
@@ -289,21 +258,26 @@ public class MascotInteractions : MonoBehaviour
     // ========== HOVER & GRAB DETECTION ==========
     
     /// <summary>
-    /// Handles hover detection for grab activation
+    /// Handles hover detection for floating state activation
     /// </summary>
     void HandleHoverDetection()
     {
         bool currentlyOverMascot = IsPointerOverMascot();
         
-        if (currentlyOverMascot && !isHovering)
+        if (currentlyOverMascot && !isHovering && !isGrabbing)
         {
-            // Start hovering
+            // Start hovering (only if not already floating)
             StartHover();
         }
         else if (!currentlyOverMascot && isHovering)
         {
             // Stop hovering
             StopHover();
+        }
+        else if (!currentlyOverMascot && isGrabbing)
+        {
+            // User moved away while floating - stop floating immediately
+            StopGrabbing();
         }
     }
     
@@ -385,194 +359,47 @@ public class MascotInteractions : MonoBehaviour
     }
     
     /// <summary>
-    /// Starts the grabbing state
+    /// Starts the Floating animation (triggered by 2-second hover)
     /// </summary>
     void StartGrabbing()
     {
-        if (isGrabbing) return; // Already grabbing
+        if (isGrabbing) return; // Already floating
         
         isGrabbing = true;
         isHovering = false;
         
-        // Get current pointer position for offset calculation
-        Vector2 pointerPosition = enableTouchInput && Input.touchCount > 0 
-            ? Input.GetTouch(0).position 
-            : (Vector2)Input.mousePosition;
-        
-        Vector3 worldPointerPos = GetWorldPositionFromScreen(pointerPosition);
-        if (parentTransform != null)
+        // Trigger floating animation
+        if (enableGrabbingAnimation && mascotAnimations != null)
         {
-            grabOffset = parentTransform.position - worldPointerPos;
-        }
-        
-        // Trigger grabbing animation
-        if (mascotAnimations != null)
-        {
-            mascotAnimations.StartGrabbing();
+            mascotAnimations.StartFloating();
         }
         
         if (debugMode)
-            Debug.Log("MascotInteractions: *** GRABBING STARTED! *** Mascot can now be moved.");
+            Debug.Log("MascotInteractions: *** FLOATING ANIMATION STARTED! *** isFloating = true");
     }
     
     /// <summary>
-    /// Stops the grabbing state and returns mascot to initial position
+    /// Stops the Floating animation state
     /// </summary>
     void StopGrabbing()
     {
-        if (!isGrabbing) return; // Not grabbing
+        if (!isGrabbing) return; // Not floating
         
         isGrabbing = false;
         
-        // Return to initial position (if enabled)
-        if (returnToInitialPosition && parentTransform != null)
-        {
-            if (smoothReturn)
-            {
-                // Start smooth return animation
-                if (returnCoroutine != null)
-                    StopCoroutine(returnCoroutine);
-                
-                returnCoroutine = StartCoroutine(SmoothReturnToInitialPosition());
-            }
-            else
-            {
-                // Instant return
-                parentTransform.position = initialGrabPosition;
-                lastValidPosition = initialGrabPosition;
-                
-                if (debugMode)
-                    Debug.Log($"MascotInteractions: Instantly returned mascot to initial position: {initialGrabPosition}");
-            }
-        }
-        
-        // Stop grabbing animation
+        // Stop floating animation - set isFloating to false
         if (mascotAnimations != null)
         {
-            mascotAnimations.StopGrabbing();
+            mascotAnimations.StopFloating();
         }
         
         if (debugMode)
-            Debug.Log("MascotInteractions: Grabbing stopped, returning to Look Around");
+            Debug.Log("MascotInteractions: *** FLOATING ANIMATION STOPPED! *** isFloating = false, returning to Look Around");
     }
     
-    /// <summary>
-    /// Handles movement while grabbing
-    /// </summary>
-    void HandleGrabMovement()
-    {
-        if (!isGrabbing || parentTransform == null) return;
-        
-        // Check if user is still holding/touching
-        bool stillHolding = false;
-        Vector2 currentPointerPos = Vector2.zero;
-        
-        if (enableTouchInput && Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            stillHolding = touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary;
-            currentPointerPos = touch.position;
-        }
-        else if (enableMouseInput && Input.GetMouseButton(0))
-        {
-            stillHolding = true;
-            currentPointerPos = Input.mousePosition;
-        }
-        
-        if (!stillHolding)
-        {
-            // User released, stop grabbing
-            StopGrabbing();
-            return;
-        }
-        
-        // Calculate new position
-        Vector3 worldPointerPos = GetWorldPositionFromScreen(currentPointerPos);
-        Vector3 targetPosition = worldPointerPos + grabOffset;
-        
-        // Check sphere boundary constraint
-        Vector3 grabCenterWorld = initialGrabPosition + grabCenter;
-        float distanceFromCenter = Vector3.Distance(targetPosition, grabCenterWorld);
-        
-        if (distanceFromCenter <= grabSphereRadius)
-        {
-            // Within bounds, move to target position
-            parentTransform.position = targetPosition;
-            lastValidPosition = targetPosition;
-        }
-        else
-        {
-            // Outside bounds, stop grabbing
-            if (debugMode)
-                Debug.Log($"MascotInteractions: Outside grab sphere ({distanceFromCenter:F2} > {grabSphereRadius}), stopping grab");
-            
-            // Return to last valid position
-            parentTransform.position = lastValidPosition;
-            StopGrabbing();
-        }
-    }
+
     
-    /// <summary>
-    /// Converts screen position to world position on a plane
-    /// </summary>
-    /// <param name="screenPosition">Screen position</param>
-    /// <returns>World position</returns>
-    Vector3 GetWorldPositionFromScreen(Vector2 screenPosition)
-    {
-        if (mainCamera == null) return Vector3.zero;
-        
-        // Create a plane at the mascot's Y position
-        float planeY = parentTransform != null ? parentTransform.position.y : 0f;
-        Plane plane = new Plane(Vector3.up, new Vector3(0, planeY, 0));
-        
-        Ray ray = mainCamera.ScreenPointToRay(screenPosition);
-        
-        if (plane.Raycast(ray, out float distance))
-        {
-            return ray.GetPoint(distance);
-        }
-        
-        // Fallback: use camera's forward direction
-        return mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, 10f));
-    }
-    
-    /// <summary>
-    /// Smoothly returns the mascot to its initial position
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator SmoothReturnToInitialPosition()
-    {
-        if (parentTransform == null) yield break;
-        
-        Vector3 startPosition = parentTransform.position;
-        Vector3 targetPosition = initialGrabPosition;
-        float elapsedTime = 0f;
-        
-        if (debugMode)
-            Debug.Log($"MascotInteractions: Starting smooth return from {startPosition} to {targetPosition} over {returnDuration}s");
-        
-        while (elapsedTime < returnDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float progress = elapsedTime / returnDuration;
-            
-            // Use smooth ease-out curve for natural movement
-            float smoothProgress = 1f - (1f - progress) * (1f - progress);
-            
-            Vector3 currentPosition = Vector3.Lerp(startPosition, targetPosition, smoothProgress);
-            parentTransform.position = currentPosition;
-            
-            yield return null;
-        }
-        
-        // Ensure we end exactly at the target position
-        parentTransform.position = targetPosition;
-        lastValidPosition = targetPosition;
-        returnCoroutine = null;
-        
-        if (debugMode)
-            Debug.Log("MascotInteractions: Smooth return completed");
-    }
+
 
     
     /// <summary>
@@ -584,37 +411,56 @@ public class MascotInteractions : MonoBehaviour
     }
     
     /// <summary>
-    /// Public method to manually return mascot to initial position
+    /// Public method to manually start floating animation
     /// </summary>
-    public void ReturnToInitialPosition(bool useSmooth = true)
+    public void StartFloatingAnimation()
     {
-        if (parentTransform == null) return;
-        
-        // Stop any grabbing if active
-        if (isGrabbing)
-        {
-            StopGrabbing();
-            return; // StopGrabbing will handle the return
-        }
-        
-        if (useSmooth && smoothReturn)
-        {
-            // Start smooth return animation
-            if (returnCoroutine != null)
-                StopCoroutine(returnCoroutine);
-            
-            returnCoroutine = StartCoroutine(SmoothReturnToInitialPosition());
-        }
-        else
-        {
-            // Instant return
-            parentTransform.position = initialGrabPosition;
-            lastValidPosition = initialGrabPosition;
-            
-            if (debugMode)
-                Debug.Log($"MascotInteractions: Manually returned mascot to initial position: {initialGrabPosition}");
-        }
+        StartGrabbing();
     }
+    
+    /// <summary>
+    /// Public method to manually stop floating animation
+    /// </summary>
+    public void StopFloatingAnimation()
+    {
+        StopGrabbing();
+    }
+    
+    /// <summary>
+    /// Public method to manually start floating animation (backward compatibility)
+    /// </summary>
+    public void TriggerGetGrabAnimation()
+    {
+        StartGrabbing();
+    }
+    
+    /// <summary>
+    /// Public method to manually stop floating animation (backward compatibility)
+    /// </summary>
+    public void StopGetGrabAnimation()
+    {
+        StopGrabbing();
+    }
+    
+    /// <summary>
+    /// Gets the current floating state
+    /// </summary>
+    /// <returns>True if currently in floating animation</returns>
+    public bool IsCurrentlyFloating()
+    {
+        return isGrabbing;
+    }
+    
+    /// <summary>
+    /// Gets the current grabbing state (backward compatibility - same as IsCurrentlyFloating)
+    /// </summary>
+    /// <returns>True if currently in floating animation</returns>
+    public bool IsCurrentlyGrabbing()
+    {
+        return isGrabbing;
+    }
+    
+
     
     /// <summary>
     /// Gets the current tap count
@@ -675,27 +521,6 @@ public class MascotInteractions : MonoBehaviour
             Gizmos.DrawWireSphere(center + Vector3.up * (height * 0.5f - radius), radius);
             Gizmos.DrawWireSphere(center + Vector3.down * (height * 0.5f - radius), radius);
         }
-        
-        // Draw grab sphere boundary
-        Vector3 grabCenterWorld = initialGrabPosition + grabCenter;
-        Gizmos.color = isGrabbing ? Color.red : Color.blue;
-        Gizmos.matrix = Matrix4x4.identity;
-        Gizmos.DrawWireSphere(grabCenterWorld, grabSphereRadius);
-        
-        // Draw grab center point
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(grabCenterWorld, Vector3.one * 0.2f);
-        
-        // Draw current position if grabbing
-        if (isGrabbing && parentTransform != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(parentTransform.position, Vector3.one * 0.1f);
-            
-            // Draw line from center to current position
-            Gizmos.color = Color.white;
-            Gizmos.DrawLine(grabCenterWorld, parentTransform.position);
-        }
     }
     
     void OnDestroy()
@@ -709,13 +534,6 @@ public class MascotInteractions : MonoBehaviour
         {
             StopCoroutine(hoverCoroutine);
             hoverCoroutine = null;
-        }
-        
-        // Clean up return coroutine
-        if (returnCoroutine != null)
-        {
-            StopCoroutine(returnCoroutine);
-            returnCoroutine = null;
         }
         
         isHovering = false;

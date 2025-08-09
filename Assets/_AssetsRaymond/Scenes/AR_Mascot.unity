@@ -1022,9 +1022,7 @@ MonoBehaviour:
   enableMouseInput: 1
   hoverTimeToGrab: 2
   enableHoverGrab: 1
-  grabCenter: {x: 0, y: 0, z: 0}
-  grabSphereRadius: 2.2
-  parentTransform: {fileID: 817681195}
+  enableGrabbingAnimation: 1
   mascotAnimations: {fileID: 0}
   interactionCollider: {fileID: 0}
   debugMode: 0
@@ -1055,6 +1053,8 @@ MonoBehaviour:
   - Wave Hip Hop Dance
   getHitAnimationName: getHit
   getHitAnimationDuration: 0.1
+  getGrabAnimationName: getGrab
+  getGrabAnimationDuration: 2
 --- !u!1 &849226636
 GameObject:
   m_ObjectHideFlags: 0
