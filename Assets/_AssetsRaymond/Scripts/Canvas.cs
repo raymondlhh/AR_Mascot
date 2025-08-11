@@ -27,6 +27,7 @@ using UnityEngine.UI;
 /// - Public methods for programmatic scrolling
 /// - 8 dance button integration with mascot animations
 /// - Animation state management (isDancing, Look Around default)
+/// - Button click sound effects
 /// 
 /// Button Layout (0-7):
 /// 0 - FYP_Button (Chicken Dance)
@@ -43,6 +44,7 @@ using UnityEngine.UI;
 /// - Click any button to trigger its corresponding dance animation
 /// - Click the same button again to restart the animation
 /// - Animation automatically returns to "Look Around" when finished
+/// - Button clicks will play sound effects
 /// </summary>
 public class Canvas : MonoBehaviour
 {
@@ -57,6 +59,10 @@ public class Canvas : MonoBehaviour
     
     [Header("Mascot Animation Control")]
     public MascotAnimations mascotController;
+    
+    [Header("Audio Management")]
+    public AudioManager audioManager;
+    [SerializeField] private string buttonClickSoundName = "ButtonClick";
     
     [Header("Dance Buttons")]
     public Button[] danceButtons = new Button[8];
@@ -85,6 +91,7 @@ public class Canvas : MonoBehaviour
     {
         SetupScrolling();
         SetupMascotControl();
+        SetupAudioManager();
         SetupDanceButtons();
     }
     
@@ -132,6 +139,24 @@ public class Canvas : MonoBehaviour
         else if (debugButtonClicks)
         {
             Debug.Log("Canvas: Mascot controller found and connected");
+        }
+    }
+    
+    void SetupAudioManager()
+    {
+        // Auto-find AudioManager if not assigned
+        if (audioManager == null)
+        {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
+        
+        if (audioManager == null)
+        {
+            Debug.LogWarning("Canvas: No AudioManager found! Button click sounds will not play.");
+        }
+        else if (debugButtonClicks)
+        {
+            Debug.Log("Canvas: AudioManager found and connected");
         }
     }
     
@@ -319,8 +344,26 @@ public class Canvas : MonoBehaviour
             Debug.Log($"Canvas: Dance button {buttonIndex} ({buttonName}) clicked!");
         }
         
+        // Play button click sound
+        PlayButtonClickSound();
+        
         // Play the corresponding dance animation
         mascotController.PlayDanceAnimation(buttonIndex);
+    }
+    
+    /// <summary>
+    /// Plays the button click sound effect
+    /// </summary>
+    private void PlayButtonClickSound()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlaySFX(buttonClickSoundName);
+        }
+        else
+        {
+            Debug.LogWarning("Canvas: Cannot play button click sound - AudioManager is null!");
+        }
     }
     
     /// <summary>
