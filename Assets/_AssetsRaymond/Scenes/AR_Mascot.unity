@@ -742,6 +742,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 608762304}
   m_CullTransparentMesh: 1
+--- !u!1 &657014444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 657014445}
+  m_Layer: 0
+  m_Name: AudioPreviewer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &657014445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657014444}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &721361404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,15 +2933,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   defaultAnimationDuration: 5
   debugMode: 0
-  danceAnimationNames:
-  - Chicken Dance
-  - House Dancing
-  - Locking Hip Hop Dance
-  - Northern Soul Spin Combo
-  - Robot Hip Hop Dance
-  - Swing Dancing
-  - Tut Hip Hop Dance
-  - Wave Hip Hop Dance
+  danceAnimationNames: []
   getHitAnimationName: getHit
   getHitAnimationDuration: 3
 --- !u!114 &1951464208
@@ -3337,3 +3360,4 @@ SceneRoots:
   - {fileID: 1376905803}
   - {fileID: 1823883374}
   - {fileID: 2083675375}
+  - {fileID: 657014445}
