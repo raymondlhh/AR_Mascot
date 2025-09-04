@@ -18,14 +18,14 @@ using UnityEngine;
 /// - Animation interruption system
 /// 
 /// Animation List:
-/// 0 - Chicken Dance
+/// 0 - Chicken Action
 /// 1 - House Dancing  
-/// 2 - Locking Hip Hop Dance
+/// 2 - Locking Hip Hop Action
 /// 3 - Northern Soul Spin Combo
-/// 4 - Robot Hip Hop Dance
+/// 4 - Robot Hip Hop Action
 /// 5 - Swing Dancing
-/// 6 - Tut Hip Hop Dance
-/// 7 - Wave Hip Hop Dance
+/// 6 - Tut Hip Hop Action
+/// 7 - Wave Hip Hop Action
 /// getHit - Special reaction animation triggered by double-tap
 /// </summary>
 public class MascotAnimations : MonoBehaviour
@@ -38,16 +38,16 @@ public class MascotAnimations : MonoBehaviour
     public bool debugMode = false;
     
     [Header("Animation Names")]
-    public string[] danceAnimationNames = new string[]
+    public string[] actionAnimationNames = new string[]
     {
-        "Chicken Dance",
+        "Chicken Action",
         "House Dancing", 
-        "Locking Hip Hop Dance",
+        "Locking Hip Hop Action",
         "Northern Soul Spin Combo",
-        "Robot Hip Hop Dance",
+        "Robot Hip Hop Action",
         "Swing Dancing",
-        "Tut Hip Hop Dance",
-        "Wave Hip Hop Dance"
+        "Tut Hip Hop Action",
+        "Wave Hip Hop Action"
     };
     
     [Header("Special Animations")]
@@ -55,9 +55,9 @@ public class MascotAnimations : MonoBehaviour
     public float getHitAnimationDuration = 3f; // Default duration for getHit animation
     
     // Private variables
-    private bool isDancing = false;
+    private bool isActing = false;
     private bool isGettingHit = false;
-    private int currentDanceIndex = -1;
+    private int currentActionIndex = -1;
     private Coroutine currentAnimationCoroutine;
     private AnimationType currentAnimationType = AnimationType.LookAround;
     
@@ -70,7 +70,7 @@ public class MascotAnimations : MonoBehaviour
     public enum AnimationType
     {
         LookAround,
-        Dancing,
+        Acting,
         GetHit
     }
     
@@ -100,7 +100,7 @@ public class MascotAnimations : MonoBehaviour
         
         // Initialize animation hashes
         animationHashes = new Dictionary<string, int>();
-        foreach (string animName in danceAnimationNames)
+        foreach (string animName in actionAnimationNames)
         {
             animationHashes[animName] = Animator.StringToHash(animName);
         }
@@ -110,18 +110,18 @@ public class MascotAnimations : MonoBehaviour
         SetAnimationState(AnimationType.LookAround);
         
         if (debugMode)
-            Debug.Log("MascotAnimations initialized with " + danceAnimationNames.Length + " dance animations + getHit animation");
+            Debug.Log("MascotAnimations initialized with " + actionAnimationNames.Length + " action animations + getHit animation");
     }
     
     /// <summary>
-    /// Plays a specific dance animation by index (0-7)
+    /// Plays a specific action animation by index (0-7)
     /// </summary>
-    /// <param name="danceIndex">Index of the dance animation (0-7)</param>
-    public void PlayDanceAnimation(int danceIndex)
+    /// <param name="danceIndex">Index of the action animation (0-7)</param>
+    public void PlayActionAnimation(int danceIndex)
     {
-        if (danceIndex < 0 || danceIndex >= danceAnimationNames.Length)
+        if (danceIndex < 0 || danceIndex >= actionAnimationNames.Length)
         {
-            Debug.LogError($"MascotAnimations: Invalid dance index {danceIndex}. Must be between 0 and {danceAnimationNames.Length - 1}");
+            Debug.LogError($"MascotAnimations: Invalid dance index {danceIndex}. Must be between 0 and {actionAnimationNames.Length - 1}");
             return;
         }
         
@@ -132,10 +132,10 @@ public class MascotAnimations : MonoBehaviour
         }
         
         // If the same dance animation is already playing, restart it
-        if (currentAnimationType == AnimationType.Dancing && currentDanceIndex == danceIndex)
+        if (currentAnimationType == AnimationType.Acting && currentActionIndex == danceIndex)
         {
             if (debugMode)
-                Debug.Log($"MascotAnimations: Restarting {danceAnimationNames[danceIndex]} animation");
+                Debug.Log($"MascotAnimations: Restarting {actionAnimationNames[danceIndex]} animation");
             RestartCurrentAnimation();
             return;
         }
@@ -143,32 +143,32 @@ public class MascotAnimations : MonoBehaviour
         // Stop current animation if any
         StopCurrentAnimation();
         
-        // Play the new dance animation
-        currentDanceIndex = danceIndex;
-        currentAnimationType = AnimationType.Dancing;
-        string animationName = danceAnimationNames[danceIndex];
+        // Play the new action animation
+        currentActionIndex = danceIndex;
+        currentAnimationType = AnimationType.Acting;
+        string animationName = actionAnimationNames[danceIndex];
         
         if (debugMode)
             Debug.Log($"MascotAnimations: Playing {animationName} animation (index: {danceIndex})");
         
-        // Set dancing state and play animation
-        SetAnimationState(AnimationType.Dancing);
+        // Set acting state and play animation
+        SetAnimationState(AnimationType.Acting);
         PlaySpecificAnimation(animationName);
         
         // Start coroutine to handle animation completion
-        currentAnimationCoroutine = StartCoroutine(HandleAnimationCompletion(animationName, AnimationType.Dancing));
+        currentAnimationCoroutine = StartCoroutine(HandleAnimationCompletion(animationName, AnimationType.Acting));
     }
     
     /// <summary>
-    /// Plays a specific dance animation by name
+    /// Plays a specific action animation by name
     /// </summary>
     /// <param name="animationName">Name of the animation to play</param>
-    public void PlayDanceAnimation(string animationName)
+    public void PlayActionAnimation(string animationName)
     {
-        int index = System.Array.IndexOf(danceAnimationNames, animationName);
+        int index = System.Array.IndexOf(actionAnimationNames, animationName);
         if (index >= 0)
         {
-            PlayDanceAnimation(index);
+            PlayActionAnimation(index);
         }
         else
         {
@@ -196,12 +196,12 @@ public class MascotAnimations : MonoBehaviour
             return;
         }
         
-        // Stop current animation (dance or other)
+        // Stop current animation (action or other)
         StopCurrentAnimation();
         
         // Play getHit animation
         currentAnimationType = AnimationType.GetHit;
-        currentDanceIndex = -1; // Reset dance index since we're not dancing
+        currentActionIndex = -1; // Reset index since we're not acting
         
         if (debugMode)
             Debug.Log("MascotAnimations: Playing getHit animation");
@@ -228,7 +228,7 @@ public class MascotAnimations : MonoBehaviour
         }
         
         SetAnimationState(AnimationType.LookAround);
-        currentDanceIndex = -1;
+        currentActionIndex = -1;
         currentAnimationType = AnimationType.LookAround;
         
         if (debugMode)
@@ -242,13 +242,21 @@ public class MascotAnimations : MonoBehaviour
     {
         StopCurrentAnimation();
     }
+
+    /// <summary>
+    /// Stops current action and returns to Look Around
+    /// </summary>
+    public void StopAction()
+    {
+        StopCurrentAnimation();
+    }
     
     /// <summary>
     /// Restarts the currently playing animation
     /// </summary>
     public void RestartCurrentAnimation()
     {
-        if (currentAnimationType == AnimationType.Dancing && currentDanceIndex >= 0)
+        if (currentAnimationType == AnimationType.Acting && currentActionIndex >= 0)
         {
             // Stop current coroutine
             if (currentAnimationCoroutine != null)
@@ -257,12 +265,12 @@ public class MascotAnimations : MonoBehaviour
                 currentAnimationCoroutine = null;
             }
             
-            // Restart the dance animation
-            string animationName = danceAnimationNames[currentDanceIndex];
+            // Restart the action animation
+            string animationName = actionAnimationNames[currentActionIndex];
             PlaySpecificAnimation(animationName);
             
             // Start new completion handler
-            currentAnimationCoroutine = StartCoroutine(HandleAnimationCompletion(animationName, AnimationType.Dancing));
+            currentAnimationCoroutine = StartCoroutine(HandleAnimationCompletion(animationName, AnimationType.Acting));
         }
         else if (currentAnimationType == AnimationType.GetHit)
         {
@@ -295,21 +303,21 @@ public class MascotAnimations : MonoBehaviour
                 case AnimationType.LookAround:
                     animator.SetBool(isDancingHash, false);
                     animator.SetBool(getHitHash, false);
-                    isDancing = false;
+                    isActing = false;
                     isGettingHit = false;
                     break;
                     
-                case AnimationType.Dancing:
+                case AnimationType.Acting:
                     animator.SetBool(isDancingHash, true);
                     animator.SetBool(getHitHash, false);
-                    isDancing = true;
+                    isActing = true;
                     isGettingHit = false;
                     break;
                     
                 case AnimationType.GetHit:
                     animator.SetBool(isDancingHash, false);
                     animator.SetBool(getHitHash, true);
-                    isDancing = false;
+                    isActing = false;
                     isGettingHit = true;
                     break;
             }
@@ -367,7 +375,7 @@ public class MascotAnimations : MonoBehaviour
         
         // Return to Look Around
         SetAnimationState(AnimationType.LookAround);
-        currentDanceIndex = -1;
+        currentActionIndex = -1;
         currentAnimationType = AnimationType.LookAround;
         currentAnimationCoroutine = null;
         
@@ -402,12 +410,12 @@ public class MascotAnimations : MonoBehaviour
     }
     
     /// <summary>
-    /// Gets the current dancing state
+    /// Gets the current acting state
     /// </summary>
-    /// <returns>True if currently dancing</returns>
-    public bool IsDancing()
+    /// <returns>True if currently acting</returns>
+    public bool IsActing()
     {
-        return isDancing;
+        return isActing;
     }
     
     /// <summary>
@@ -434,19 +442,19 @@ public class MascotAnimations : MonoBehaviour
     /// Gets the current dance index
     /// </summary>
     /// <returns>Current dance index (-1 if not dancing)</returns>
-    public int GetCurrentDanceIndex()
+    public int GetCurrentActionIndex()
     {
-        return currentDanceIndex;
+        return currentActionIndex;
     }
     
     /// <summary>
     /// Gets the name of the currently playing dance
     /// </summary>
     /// <returns>Current dance name (null if not dancing)</returns>
-    public string GetCurrentDanceName()
+    public string GetCurrentActionName()
     {
-        if (currentDanceIndex >= 0 && currentDanceIndex < danceAnimationNames.Length)
-            return danceAnimationNames[currentDanceIndex];
+        if (currentActionIndex >= 0 && currentActionIndex < actionAnimationNames.Length)
+            return actionAnimationNames[currentActionIndex];
         return null;
     }
     

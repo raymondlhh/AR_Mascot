@@ -30,14 +30,14 @@ using UnityEngine.UI;
 /// - Button click sound effects
 /// 
 /// Button Layout (0-7):
-/// 0 - FYP_Button (Chicken Dance)
+/// 0 - FYP_Button (Chicken Action)
 /// 1 - VRAR_Button (House Dancing)
-/// 2 - VideoGame_Button (Locking Hip Hop Dance)
+/// 2 - VideoGame_Button (Locking Hip Hop Action)
 /// 3 - BoardGame_Button (Northern Soul Spin Combo)
-/// 4 - 3DModeling_Button (Robot Hip Hop Dance)
+/// 4 - 3DModeling_Button (Robot Hip Hop Action)
 /// 5 - 2D3DAnimation_Button (Swing Dancing)
-/// 6 - GameEnvironment_Button (Tut Hip Hop Dance)
-/// 7 - VideoAudioProduction_Button (Wave Hip Hop Dance)
+/// 6 - GameEnvironment_Button (Tut Hip Hop Action)
+/// 7 - VideoAudioProduction_Button (Wave Hip Hop Action)
 /// 
 /// Usage:
 /// - Use the scrollbar to navigate through hidden buttons
@@ -64,8 +64,8 @@ public class Canvas : MonoBehaviour
     public AudioManager audioManager;
     [SerializeField] private string buttonClickSoundName = "ButtonClick";
     
-    [Header("Dance Buttons")]
-    public Button[] danceButtons = new Button[8];
+    [Header("Action Buttons")]
+    public Button[] actionButtons = new Button[8];
     
     [Header("Button Names (for auto-detection)")]
     public string[] buttonNames = new string[]
@@ -92,7 +92,7 @@ public class Canvas : MonoBehaviour
         SetupScrolling();
         SetupMascotControl();
         SetupAudioManager();
-        SetupDanceButtons();
+        SetupActionButtons();
     }
     
     void SetupScrolling()
@@ -134,7 +134,7 @@ public class Canvas : MonoBehaviour
         
         if (mascotController == null)
         {
-            Debug.LogWarning("Canvas: No Mascot component found! Dance buttons will not function.");
+            Debug.LogWarning("Canvas: No Mascot component found! Action buttons will not function.");
         }
         else if (debugButtonClicks)
         {
@@ -160,14 +160,14 @@ public class Canvas : MonoBehaviour
         }
     }
     
-    void SetupDanceButtons()
+    void SetupActionButtons()
     {
         // Auto-find buttons if not assigned
         bool foundAllButtons = true;
         
-        for (int i = 0; i < danceButtons.Length; i++)
+        for (int i = 0; i < actionButtons.Length; i++)
         {
-            if (danceButtons[i] == null)
+            if (actionButtons[i] == null)
             {
                 // Try to find button by name
                 if (i < buttonNames.Length && !string.IsNullOrEmpty(buttonNames[i]))
@@ -175,25 +175,25 @@ public class Canvas : MonoBehaviour
                     GameObject buttonObj = GameObject.Find(buttonNames[i]);
                     if (buttonObj != null)
                     {
-                        danceButtons[i] = buttonObj.GetComponent<Button>();
+                        actionButtons[i] = buttonObj.GetComponent<Button>();
                     }
                 }
                 
-                if (danceButtons[i] == null)
+                if (actionButtons[i] == null)
                 {
-                    Debug.LogWarning($"Canvas: Dance button {i} ({(i < buttonNames.Length ? buttonNames[i] : "Unknown")}) not found!");
+                    Debug.LogWarning($"Canvas: Action button {i} ({(i < buttonNames.Length ? buttonNames[i] : "Unknown")}) not found!");
                     foundAllButtons = false;
                 }
             }
         }
         
         // Setup button click listeners
-        for (int i = 0; i < danceButtons.Length; i++)
+        for (int i = 0; i < actionButtons.Length; i++)
         {
-            if (danceButtons[i] != null)
+            if (actionButtons[i] != null)
             {
                 int buttonIndex = i; // Capture for closure
-                danceButtons[i].onClick.AddListener(() => OnDanceButtonClicked(buttonIndex));
+                actionButtons[i].onClick.AddListener(() => OnActionButtonClicked(buttonIndex));
                 
                 if (debugButtonClicks)
                     Debug.Log($"Canvas: Setup button {buttonIndex} ({(buttonIndex < buttonNames.Length ? buttonNames[buttonIndex] : "Unknown")})");
@@ -202,11 +202,11 @@ public class Canvas : MonoBehaviour
         
         if (foundAllButtons)
         {
-            Debug.Log("Canvas: All 8 dance buttons found and connected successfully!");
+            Debug.Log("Canvas: All 8 action buttons found and connected successfully!");
         }
         else
         {
-            Debug.LogWarning("Canvas: Some dance buttons were not found. Check button names and hierarchy.");
+            Debug.LogWarning("Canvas: Some action buttons were not found. Check button names and hierarchy.");
         }
     }
     
@@ -318,21 +318,21 @@ public class Canvas : MonoBehaviour
         }
     }
     
-    // ========== DANCE BUTTON HANDLERS ==========
+    // ========== ACTION BUTTON HANDLERS ========== 
     
     /// <summary>
-    /// Handles dance button clicks
+    /// Handles action button clicks
     /// </summary>
     /// <param name="buttonIndex">Index of the clicked button (0-7)</param>
-    public void OnDanceButtonClicked(int buttonIndex)
+    public void OnActionButtonClicked(int buttonIndex)
     {
         if (mascotController == null)
         {
-            Debug.LogError("Canvas: Cannot play dance animation - Mascot controller is null!");
+            Debug.LogError("Canvas: Cannot play action animation - Mascot controller is null!");
             return;
         }
         
-        if (buttonIndex < 0 || buttonIndex >= danceButtons.Length)
+        if (buttonIndex < 0 || buttonIndex >= actionButtons.Length)
         {
             Debug.LogError($"Canvas: Invalid button index {buttonIndex}");
             return;
@@ -341,14 +341,14 @@ public class Canvas : MonoBehaviour
         if (debugButtonClicks)
         {
             string buttonName = buttonIndex < buttonNames.Length ? buttonNames[buttonIndex] : "Unknown";
-            Debug.Log($"Canvas: Dance button {buttonIndex} ({buttonName}) clicked!");
+            Debug.Log($"Canvas: Action button {buttonIndex} ({buttonName}) clicked!");
         }
         
         // Play button click sound
         PlayButtonClickSound();
         
-        // Play the corresponding dance animation
-        mascotController.PlayDanceAnimation(buttonIndex);
+        // Play the corresponding action animation
+        mascotController.PlayActionAnimation(buttonIndex);
     }
     
     /// <summary>
@@ -367,41 +367,41 @@ public class Canvas : MonoBehaviour
     }
     
     /// <summary>
-    /// Public method to trigger specific dance animations (for external scripts)
+    /// Public method to trigger specific action animations (for external scripts)
     /// </summary>
-    /// <param name="danceIndex">Index of the dance to play (0-7)</param>
-    public void PlayDance(int danceIndex)
+    /// <param name="danceIndex">Index of the action to play (0-7)</param>
+    public void PlayAction(int danceIndex)
     {
-        OnDanceButtonClicked(danceIndex);
+        OnActionButtonClicked(danceIndex);
     }
     
     /// <summary>
-    /// Public method to stop current dance and return to Look Around
+    /// Public method to stop current action and return to Look Around
     /// </summary>
-    public void StopDance()
+    public void StopAction()
     {
         if (mascotController != null)
         {
-            mascotController.StopDancing();
+            mascotController.StopAction();
         }
     }
     
     /// <summary>
-    /// Gets the current dancing state from the mascot
+    /// Gets the current acting state from the mascot
     /// </summary>
-    /// <returns>True if mascot is currently dancing</returns>
-    public bool IsMascotDancing()
+    /// <returns>True if mascot is currently acting</returns>
+    public bool IsMascotActing()
     {
-        return mascotController != null && mascotController.IsDancing();
+        return mascotController != null && mascotController.IsActing();
     }
     
     /// <summary>
-    /// Gets the current dance index from the mascot
+    /// Gets the current action index from the mascot
     /// </summary>
-    /// <returns>Current dance index (-1 if not dancing)</returns>
-    public int GetCurrentDanceIndex()
+    /// <returns>Current action index (-1 if not acting)</returns>
+    public int GetCurrentActionIndex()
     {
-        return mascotController != null ? mascotController.GetCurrentDanceIndex() : -1;
+        return mascotController != null ? mascotController.GetCurrentActionIndex() : -1;
     }
     
     void OnDestroy()
@@ -413,11 +413,11 @@ public class Canvas : MonoBehaviour
         }
         
         // Clean up button listeners
-        for (int i = 0; i < danceButtons.Length; i++)
+        for (int i = 0; i < actionButtons.Length; i++)
         {
-            if (danceButtons[i] != null)
+            if (actionButtons[i] != null)
             {
-                danceButtons[i].onClick.RemoveAllListeners();
+                actionButtons[i].onClick.RemoveAllListeners();
             }
         }
     }

@@ -1,0 +1,173 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class CourseProps
+{
+    public string courseName;
+    public List<GameObject> props;
+    
+    public CourseProps(string name)
+    {
+        courseName = name;
+        props = new List<GameObject>();
+    }
+}
+
+public class MascotProps : MonoBehaviour
+{
+    [Header("Course Props Configuration")]
+    public List<CourseProps> coursePropsList = new List<CourseProps>();
+    
+    [Header("VRAR Props Control")]
+    
+    
+    [Header("Debug Info")]
+    public bool showDebugInfo = true;
+    
+    
+    
+    void Start()
+    {
+        HideAllProps();
+    }
+    
+    public CourseProps GetCourse(string courseName)
+    {
+        return coursePropsList.Find(course => course.courseName == courseName);
+    }
+    
+    public void PrintAllProps()
+    {
+        foreach (CourseProps course in coursePropsList)
+        {
+            Debug.Log($"Course: {course.courseName}");
+            foreach (GameObject prop in course.props)
+            {
+                if (prop != null)
+                {
+                    Debug.Log($"  - {prop.name}");
+                }
+                else
+                {
+                    Debug.Log($"  - [Empty GameObject slot]");
+                }
+            }
+        }
+    }
+    
+    public List<GameObject> GetPropsForCourse(string courseName)
+    {
+        CourseProps course = GetCourse(courseName);
+        List<GameObject> props = new List<GameObject>();
+        
+        if (course != null)
+        {
+            foreach (GameObject prop in course.props)
+            {
+                if (prop != null)
+                {
+                    props.Add(prop);
+                }
+            }
+        }
+        
+        return props;
+    }
+    
+    public void HideAllProps()
+    {
+        foreach (CourseProps course in coursePropsList)
+        {
+            foreach (GameObject prop in course.props)
+            {
+                if (prop != null)
+                {
+                    prop.SetActive(false);
+                }
+            }
+        }
+        
+        if (showDebugInfo)
+        {
+            Debug.Log("All props have been hidden (SetActive false)");
+        }
+    }
+    
+    public void ShowAllProps()
+    {
+        foreach (CourseProps course in coursePropsList)
+        {
+            foreach (GameObject prop in course.props)
+            {
+                if (prop != null)
+                {
+                    prop.SetActive(true);
+                }
+            }
+        }
+        
+        if (showDebugInfo)
+        {
+            Debug.Log("All props have been shown (SetActive true)");
+        }
+    }
+    
+    public void HidePropsForCourse(string courseName)
+    {
+        CourseProps course = GetCourse(courseName);
+        if (course != null)
+        {
+            foreach (GameObject prop in course.props)
+            {
+                if (prop != null)
+                {
+                    prop.SetActive(false);
+                }
+            }
+            
+            if (showDebugInfo)
+            {
+                Debug.Log($"Hidden all props for course: {courseName}");
+            }
+        }
+    }
+    
+    public void ShowPropsForCourse(string courseName)
+    {
+        CourseProps course = GetCourse(courseName);
+        if (course != null)
+        {
+            foreach (GameObject prop in course.props)
+            {
+                if (prop != null)
+                {
+                    prop.SetActive(true);
+                }
+            }
+            
+            if (showDebugInfo)
+            {
+                Debug.Log($"Shown all props for course: {courseName}");
+            }
+        }
+    }
+    
+    public void ShowOnlyVRARProps()
+    {
+        // Hide all props first
+        HideAllProps();
+        
+        // Then show only VRAR props
+        ShowPropsForCourse("VRAR");
+        
+        if (showDebugInfo)
+        {
+            Debug.Log("Showing only VRAR props - all other course props are hidden");
+        }
+    }
+    
+    
+    
+}
