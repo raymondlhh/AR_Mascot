@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4590aa89ea4f3734e81cd274f26ed574
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 317042
+  packageName: URP Complete VFX Bundle
+  packageVersion: 1.0.0
+  assetPath: Assets/Vefects/Space VFX URP/Shared/Materials/M_VFX_Paraboloid_01_Bright.mat
+  uploadId: 752243

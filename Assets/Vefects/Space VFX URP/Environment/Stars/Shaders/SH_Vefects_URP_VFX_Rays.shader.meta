@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: de721c45c8fdafa45947b86219dbf063
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _LUT: {fileID: 2800000, guid: 0f485f56e7c605b46bf7cf6a277d9618, type: 3}
+  - _StarNoisesTexture: {fileID: 2800000, guid: 9023cdfd26c819647b664f7724d99f02,
+      type: 3}
+  - _Texture0: {fileID: 2800000, guid: b6b367b7f381c5c469717e8035128ce3, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e282e5feaced4cb45ba67acc7ebeccee
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _LaserTexture: {fileID: 2800000, guid: f43bf21eeec22a946b9ca6b5e765f78c, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 317042
+  packageName: URP Complete VFX Bundle
+  packageVersion: 1.0.0
+  assetPath: Assets/Vefects/Space VFX URP/Space VFX/Lasers/Shaders/SH_Vefects_URP_VFX_Laser_Projectile.shader
+  uploadId: 752243

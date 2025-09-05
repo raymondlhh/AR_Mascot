@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1406942a77e9d854b92c2713f6197b72
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 317042
+  packageName: URP Complete VFX Bundle
+  packageVersion: 1.0.0
+  assetPath: Assets/Vefects/Space VFX URP/Space VFX/Missiles/Materials/M_VFX_EMP_Missile_Explosive_Impact_01.mat
+  uploadId: 752243

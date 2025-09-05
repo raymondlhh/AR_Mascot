@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7313f3ca1de2df54c8fc312b42dd3efb
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 317042
+  packageName: URP Complete VFX Bundle
+  packageVersion: 1.0.0
+  assetPath: Assets/Vefects/Space VFX URP/Shared/Shaders/SH_Vefects_URP_Lit_Opaque_01.shader
+  uploadId: 752243

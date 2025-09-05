@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5843e046508e99447b72a1145b0b7f6c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 317042
+  packageName: URP Complete VFX Bundle
+  packageVersion: 1.0.0
+  assetPath: Assets/Vefects/Space VFX URP/Space VFX/Missiles/Materials/M_VFX_Kinetic_Streak_01.mat
+  uploadId: 752243

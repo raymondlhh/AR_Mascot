@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d517834e756d79647af26fa0d5b1e716
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 317042
+  packageName: URP Complete VFX Bundle
+  packageVersion: 1.0.0
+  assetPath: Assets/Vefects/Space VFX URP/Shared/Materials/M_VFX_Glow_01_Bright.mat
+  uploadId: 752243

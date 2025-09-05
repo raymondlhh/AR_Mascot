@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 662081e8c1fed1744a10a6366673c6b3
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _TerrainLUT: {fileID: 2800000, guid: eefdc5db1c4430941b5062bc7d88bb38, type: 3}
+  - _TerrainTexture: {fileID: 2800000, guid: ec31af15634d9374a9dca49fade8e944, type: 3}
+  - _CloudsTexture: {fileID: 2800000, guid: bba7fd7d0923a3746b880c57e84963c8, type: 3}
+  - _NormalTexture: {fileID: 2800000, guid: 2d3291a140aecdd4a9c8ddd35348ffb0, type: 3}
+  - _EmissiveLUT: {fileID: 2800000, guid: 8ad064702fd0b194c8a1efd6835ee789, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 317042
+  packageName: URP Complete VFX Bundle
+  packageVersion: 1.0.0
+  assetPath: Assets/Vefects/Space VFX URP/Environment/Black Hole/Shaders/SH_Vefects_URP_VFX_Black_Hole_Event_Horizon.shader
+  uploadId: 752243

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c6fa6d2923218db44bd3f1737ed9718d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 317042
+  packageName: URP Complete VFX Bundle
+  packageVersion: 1.0.0
+  assetPath: Assets/Vefects/Space VFX URP/Space VFX/Missiles/Materials/M_VFX_Black_Hole_Glow_White_Missile.mat
+  uploadId: 752243
