@@ -32,6 +32,7 @@ public class AudioEditor : EditorWindow
         {
             // Create an audio source for previewing the sound
             GameObject audioPreviewer = new GameObject("AudioPreviewer");
+            audioPreviewer.hideFlags = HideFlags.HideAndDontSave;
             previewAudioSource = audioPreviewer.AddComponent<AudioSource>();
             previewAudioSource.hideFlags = HideFlags.HideAndDontSave;
         }
@@ -39,9 +40,23 @@ public class AudioEditor : EditorWindow
 
     private void OnDisable()
     {
+        CleanupAudioPreviewer();
+    }
+    
+    private void OnDestroy()
+    {
+        CleanupAudioPreviewer();
+    }
+    
+    private void CleanupAudioPreviewer()
+    {
         if (previewAudioSource != null)
         {
-            DestroyImmediate(previewAudioSource.gameObject);
+            if (previewAudioSource.gameObject != null)
+            {
+                DestroyImmediate(previewAudioSource.gameObject);
+            }
+            previewAudioSource = null;
         }
     }
 
