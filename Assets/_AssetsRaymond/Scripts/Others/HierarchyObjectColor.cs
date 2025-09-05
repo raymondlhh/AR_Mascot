@@ -28,7 +28,7 @@ public class HierarchyObjectColor
             Texture2D texture = null;
 
             // Write your object name in the hierarchy.
-            if (obj.name == "Headset" || obj.name == "LeftController" || obj.name == "RightController")
+            if (obj.name == "Headset" || obj.name == "LeftController" || obj.name == "RightController" || obj.name == "SolarSystem")
             {
                 backgroundColor = new Color(0.302f, 0.365f, 0.325f);
                 textColor = new Color(0.9f, 0.9f, 0.9f);

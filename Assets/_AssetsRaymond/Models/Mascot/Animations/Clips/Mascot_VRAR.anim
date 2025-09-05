@@ -223160,7 +223160,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 5.8333335
+  - time: 5.4166665
     functionName: ShowSolarSystem
     data: 
     objectReferenceParameter: {fileID: 0}

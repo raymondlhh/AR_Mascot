@@ -16,7 +16,8 @@ using UnityEngine.UI;
 ///    - The Panel child object containing the buttons
 ///    - The viewport (Canvas RectTransform)
 ///    - The Mascot component for animation control
-/// 3. Alternatively, you can manually assign the references in the inspector
+/// 3. Assign the MascotProfile GameObject reference in the inspector
+/// 4. Alternatively, you can manually assign the references in the inspector
 /// 
 /// Features:
 /// - Automatic ScrollRect setup and configuration
@@ -28,6 +29,7 @@ using UnityEngine.UI;
 /// - 8 dance button integration with mascot animations
 /// - Animation state management (isDancing, Look Around default)
 /// - Button click sound effects
+/// - MascotProfile activation requirement for button functionality
 /// 
 /// Button Layout (0-7):
 /// 0 - FYP_Button (Chicken Action)
@@ -41,6 +43,7 @@ using UnityEngine.UI;
 /// 
 /// Usage:
 /// - Use the scrollbar to navigate through hidden buttons
+/// - Buttons are only clickable when MascotProfile object is active
 /// - Click any button to trigger its corresponding dance animation
 /// - Click the same button again to restart the animation
 /// - Animation automatically returns to "Look Around" when finished
@@ -59,6 +62,7 @@ public class Canvas : MonoBehaviour
     
     [Header("Mascot Animation Control")]
     public MascotAnimations mascotController;
+    public GameObject mascotProfile; // Reference to MascotProfile object
     
     [Header("Audio Management")]
     public AudioManager audioManager;
@@ -326,6 +330,16 @@ public class Canvas : MonoBehaviour
     /// <param name="buttonIndex">Index of the clicked button (0-7)</param>
     public void OnActionButtonClicked(int buttonIndex)
     {
+        // Check if MascotProfile is active before allowing button clicks
+        if (mascotProfile != null && !mascotProfile.activeInHierarchy)
+        {
+            if (debugButtonClicks)
+            {
+                Debug.Log("Canvas: Button click ignored - MascotProfile is not active!");
+            }
+            return;
+        }
+        
         if (mascotController == null)
         {
             Debug.LogError("Canvas: Cannot play action animation - Mascot controller is null!");
@@ -402,6 +416,15 @@ public class Canvas : MonoBehaviour
     public int GetCurrentActionIndex()
     {
         return mascotController != null ? mascotController.GetCurrentActionIndex() : -1;
+    }
+    
+    /// <summary>
+    /// Checks if buttons are currently clickable (MascotProfile is active)
+    /// </summary>
+    /// <returns>True if buttons can be clicked, false otherwise</returns>
+    public bool AreButtonsClickable()
+    {
+        return mascotProfile == null || mascotProfile.activeInHierarchy;
     }
     
     void OnDestroy()
