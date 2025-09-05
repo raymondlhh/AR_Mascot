@@ -92,6 +92,7 @@ public class Canvas : MonoBehaviour
     private float contentWidth;
     private float viewportWidth;
     
+    #region Unity Lifecycle
     void Start()
     {
         SetupScrolling();
@@ -100,6 +101,26 @@ public class Canvas : MonoBehaviour
         SetupActionButtons();
     }
     
+    void OnDestroy()
+    {
+        // Clean up event listeners
+        if (horizontalScrollbar != null)
+        {
+            horizontalScrollbar.onValueChanged.RemoveListener(OnScrollbarValueChanged);
+        }
+        
+        // Clean up button listeners
+        for (int i = 0; i < actionButtons.Length; i++)
+        {
+            if (actionButtons[i] != null)
+            {
+                actionButtons[i].onClick.RemoveAllListeners();
+            }
+        }
+    }
+    #endregion
+    
+    #region Initialization Methods
     void SetupScrolling()
     {
         // Auto-find components if not assigned
@@ -128,7 +149,9 @@ public class Canvas : MonoBehaviour
         // Calculate content dimensions
         CalculateContentDimensions();
     }
+    #endregion
     
+    #region Mascot Control Setup
     void SetupMascotControl()
     {
         // Auto-find mascot controller if not assigned
@@ -161,7 +184,9 @@ public class Canvas : MonoBehaviour
             Debug.Log("Canvas: MascotProps component found and connected");
         }
     }
+    #endregion
     
+    #region Audio Setup
     void SetupAudioManager()
     {
         // Auto-find AudioManager if not assigned
@@ -179,7 +204,9 @@ public class Canvas : MonoBehaviour
             Debug.Log("Canvas: AudioManager found and connected");
         }
     }
+    #endregion
     
+    #region Button Setup
     void SetupActionButtons()
     {
         // Auto-find buttons if not assigned
@@ -229,7 +256,9 @@ public class Canvas : MonoBehaviour
             Debug.LogWarning("Canvas: Some action buttons were not found. Check button names and hierarchy.");
         }
     }
+    #endregion
     
+    #region Scrolling Configuration
     void ConfigureScrollRect()
     {
         if (scrollRect != null && contentPanel != null)
@@ -297,7 +326,9 @@ public class Canvas : MonoBehaviour
             horizontalScrollbar.value = Mathf.Clamp01(newValue);
         }
     }
+    #endregion
     
+    #region Scrolling Input Handling
     void Update()
     {
         // Handle touch/mouse wheel scrolling if enabled
@@ -337,9 +368,9 @@ public class Canvas : MonoBehaviour
             }
         }
     }
+    #endregion
     
-    // ========== ACTION BUTTON HANDLERS ========== 
-    
+    #region Action Button Handlers
     /// <summary>
     /// Handles action button clicks
     /// </summary>
@@ -377,6 +408,21 @@ public class Canvas : MonoBehaviour
         // Play button click sound
         PlayButtonClickSound();
         
+        // Stop any currently playing narration
+        if (audioManager != null)
+        {
+            audioManager.StopNarration();
+        }
+        
+        // Play the corresponding narration
+        PlayNarrationForButton(buttonIndex);
+        
+        // Debug: Check if narration is playing
+        if (debugButtonClicks)
+        {
+            StartCoroutine(CheckNarrationStatus(buttonIndex));
+        }
+        
         // Hide all props first
         if (mascotProps != null)
         {
@@ -386,7 +432,9 @@ public class Canvas : MonoBehaviour
         // Play the corresponding action animation
         mascotController.PlayActionAnimation(buttonIndex);
     }
+    #endregion
     
+    #region Audio Methods
     /// <summary>
     /// Plays the button click sound effect
     /// </summary>
@@ -403,12 +451,152 @@ public class Canvas : MonoBehaviour
     }
     
     /// <summary>
+    /// Plays the corresponding narration for the button index
+    /// </summary>
+    /// <param name="buttonIndex">Index of the button (0-7)</param>
+    private void PlayNarrationForButton(int buttonIndex)
+    {
+        if (audioManager == null)
+        {
+            Debug.LogWarning("Canvas: Cannot play narration - AudioManager is null!");
+            return;
+        }
+        
+        if (buttonIndex < 0 || buttonIndex >= buttonNames.Length)
+        {
+            Debug.LogError($"Canvas: Invalid button index {buttonIndex} for narration");
+            return;
+        }
+        
+        // Get the narration name based on button index
+        string narrationName = buttonNames[buttonIndex];
+        
+        if (debugButtonClicks)
+        {
+            Debug.Log($"Canvas: Playing narration '{narrationName}' for button {buttonIndex}");
+        }
+        
+        // Play narration by index instead of by name
+        PlayNarrationByIndex(buttonIndex);
+    }
+    
+    /// <summary>
+    /// Plays narration by index - loads the audio file dynamically and plays it
+    /// </summary>
+    /// <param name="narrationIndex">Index of the narration (0-7)</param>
+    private void PlayNarrationByIndex(int narrationIndex)
+    {
+        if (audioManager == null)
+        {
+            Debug.LogWarning("Canvas: Cannot play narration - AudioManager is null!");
+            return;
+        }
+        
+        // Get the narration element by index
+        var narrationElement = audioManager.GetNarrationElementByIndex(narrationIndex);
+        if (narrationElement == null)
+        {
+            Debug.LogError($"Canvas: Narration element at index {narrationIndex} not found!");
+            return;
+        }
+        
+        if (narrationElement.audioFile == null)
+        {
+            Debug.LogError($"Canvas: No audio file assigned to narration at index {narrationIndex}!");
+            return;
+        }
+        
+        if (debugButtonClicks)
+        {
+            Debug.Log($"Canvas: Loading and playing narration '{narrationElement.audioName}' from index {narrationIndex}");
+        }
+        
+        // Play the narration using the element directly
+        audioManager.PlayNarrationElement(narrationElement);
+    }
+    
+    /// <summary>
+    /// Debug coroutine to check narration status
+    /// </summary>
+    private IEnumerator CheckNarrationStatus(int buttonIndex)
+    {
+        yield return new WaitForSeconds(0.1f); // Wait a bit for narration to start
+        
+        if (audioManager != null)
+        {
+            bool isPlaying = audioManager.IsNarrationPlaying();
+            string narrationName = buttonIndex < buttonNames.Length ? buttonNames[buttonIndex] : "Unknown";
+            Debug.Log($"Canvas Debug: Narration '{narrationName}' is playing: {isPlaying}");
+            
+            // Additional debugging for AudioSource
+            var narrationElement = audioManager.GetNarrationElement(narrationName);
+            if (narrationElement != null)
+            {
+                Debug.Log($"Canvas Debug: Narration element found - AudioFile: {(narrationElement.audioFile != null ? narrationElement.audioFile.name : "NULL")}, Volume: {narrationElement.volume}");
+            }
+            else
+            {
+                Debug.LogError($"Canvas Debug: Narration element '{narrationName}' not found in AudioManager!");
+            }
+            
+            if (!isPlaying)
+            {
+                Debug.LogWarning($"Canvas Debug: Narration '{narrationName}' failed to play. Check AudioSource settings!");
+            }
+        }
+    }
+    #endregion
+    
+    #region Public Methods
+    /// <summary>
     /// Public method to trigger specific action animations (for external scripts)
     /// </summary>
     /// <param name="danceIndex">Index of the action to play (0-7)</param>
     public void PlayAction(int danceIndex)
     {
         OnActionButtonClicked(danceIndex);
+    }
+    
+    /// <summary>
+    /// Public method to play narration for a specific button index (for external scripts)
+    /// </summary>
+    /// <param name="buttonIndex">Index of the button (0-7)</param>
+    public void PlayNarrationForButtonIndex(int buttonIndex)
+    {
+        PlayNarrationForButton(buttonIndex);
+    }
+    
+    /// <summary>
+    /// Test method to directly test AudioSource (for debugging)
+    /// </summary>
+    [ContextMenu("Test Narration AudioSource")]
+    public void TestNarrationAudioSource()
+    {
+        if (audioManager != null)
+        {
+            // Get the narration AudioSource directly
+            var narrationSource = audioManager.GetComponentInChildren<AudioSource>();
+            if (narrationSource != null)
+            {
+                Debug.Log($"AudioSource found - Mute: {narrationSource.mute}, Volume: {narrationSource.volume}, IsPlaying: {narrationSource.isPlaying}");
+                Debug.Log($"AudioClip: {(narrationSource.clip != null ? narrationSource.clip.name : "NULL")}");
+                
+                // Try to play a test sound
+                if (narrationSource.clip != null)
+                {
+                    narrationSource.Play();
+                    Debug.Log("Test: Playing AudioSource directly");
+                }
+                else
+                {
+                    Debug.LogWarning("Test: No AudioClip assigned to AudioSource");
+                }
+            }
+            else
+            {
+                Debug.LogError("Test: No AudioSource found in AudioManager children");
+            }
+        }
     }
     
     /// <summary>
@@ -448,22 +636,5 @@ public class Canvas : MonoBehaviour
     {
         return mascotProfile == null || mascotProfile.activeInHierarchy;
     }
-    
-    void OnDestroy()
-    {
-        // Clean up event listeners
-        if (horizontalScrollbar != null)
-        {
-            horizontalScrollbar.onValueChanged.RemoveListener(OnScrollbarValueChanged);
-        }
-        
-        // Clean up button listeners
-        for (int i = 0; i < actionButtons.Length; i++)
-        {
-            if (actionButtons[i] != null)
-            {
-                actionButtons[i].onClick.RemoveAllListeners();
-            }
-        }
-    }
+    #endregion
 }

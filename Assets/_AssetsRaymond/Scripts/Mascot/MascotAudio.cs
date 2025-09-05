@@ -9,6 +9,12 @@ public class AudioElement
     public AudioClip audioFile;
     [Range(0f, 1f)]
     public float volume = 1f;
+    [Range(0f, 1f)]
+    public float spatialBlend = 0f; // 0 = 2D, 1 = 3D, 0.5 = Mixed
+    [Header("3D Sound Settings (only applies when spatialBlend > 0)")]
+    public float minDistance = 1f;
+    public float maxDistance = 500f;
+    public AudioRolloffMode rolloffMode = AudioRolloffMode.Logarithmic;
 }
 
 public class MascotAudio : MonoBehaviour
@@ -55,8 +61,7 @@ public class MascotAudio : MonoBehaviour
             AudioElement appearElement = audioElements.Find(x => x.audioName == appearSoundName);
             if (appearElement != null && appearElement.audioFile != null)
             {
-                audioSource.clip = appearElement.audioFile;
-                audioSource.volume = appearElement.volume;
+                ApplyAudioElementSettings(appearElement);
                 audioSource.Play();
                 hasPlayedAppearSound = true;
                 
@@ -83,8 +88,7 @@ public class MascotAudio : MonoBehaviour
         AudioElement element = audioElements.Find(x => x.audioName == audioName);
         if (element != null && element.audioFile != null)
         {
-            audioSource.clip = element.audioFile;
-            audioSource.volume = element.volume;
+            ApplyAudioElementSettings(element);
             audioSource.Play();
         }
         else
@@ -99,14 +103,33 @@ public class MascotAudio : MonoBehaviour
         return audioElements.Find(x => x.audioName == audioName);
     }
     
+    // Method to apply audio element settings to the audio source
+    private void ApplyAudioElementSettings(AudioElement element)
+    {
+        if (audioSource == null) return;
+        
+        audioSource.clip = element.audioFile;
+        audioSource.volume = element.volume;
+        audioSource.spatialBlend = element.spatialBlend;
+        
+        // Apply 3D sound settings if spatial blend is greater than 0
+        if (element.spatialBlend > 0f)
+        {
+            audioSource.minDistance = element.minDistance;
+            audioSource.maxDistance = element.maxDistance;
+            audioSource.rolloffMode = element.rolloffMode;
+        }
+    }
+    
     // Method to add new audio element
-    public void AddAudioElement(string name, AudioClip clip, float volume = 1f)
+    public void AddAudioElement(string name, AudioClip clip, float volume = 1f, float spatialBlend = 0f)
     {
         AudioElement newElement = new AudioElement
         {
             audioName = name,
             audioFile = clip,
-            volume = Mathf.Clamp01(volume)
+            volume = Mathf.Clamp01(volume),
+            spatialBlend = Mathf.Clamp01(spatialBlend)
         };
         audioElements.Add(newElement);
     }
