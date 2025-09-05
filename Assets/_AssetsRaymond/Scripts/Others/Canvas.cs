@@ -67,7 +67,6 @@ public class Canvas : MonoBehaviour
     
     [Header("Audio Management")]
     public AudioManager audioManager;
-    [SerializeField] private string buttonClickSoundName = "ButtonClick";
     
     [Header("Action Buttons")]
     public Button[] actionButtons = new Button[8];
@@ -85,8 +84,6 @@ public class Canvas : MonoBehaviour
         "VideoAudioProduction_Button"
     };
     
-    [Header("Debug Settings")]
-    public bool debugButtonClicks = false;
     
     private ScrollRect scrollRect;
     private float contentWidth;
@@ -170,18 +167,10 @@ public class Canvas : MonoBehaviour
         {
             Debug.LogWarning("Canvas: No Mascot component found! Action buttons will not function.");
         }
-        else if (debugButtonClicks)
-        {
-            Debug.Log("Canvas: Mascot controller found and connected");
-        }
         
         if (mascotProps == null)
         {
             Debug.LogWarning("Canvas: No MascotProps component found! Props will not be hidden on button click.");
-        }
-        else if (debugButtonClicks)
-        {
-            Debug.Log("Canvas: MascotProps component found and connected");
         }
     }
     #endregion
@@ -198,10 +187,6 @@ public class Canvas : MonoBehaviour
         if (audioManager == null)
         {
             Debug.LogWarning("Canvas: No AudioManager found! Button click sounds will not play.");
-        }
-        else if (debugButtonClicks)
-        {
-            Debug.Log("Canvas: AudioManager found and connected");
         }
     }
     #endregion
@@ -242,16 +227,10 @@ public class Canvas : MonoBehaviour
                 int buttonIndex = i; // Capture for closure
                 actionButtons[i].onClick.AddListener(() => OnActionButtonClicked(buttonIndex));
                 
-                if (debugButtonClicks)
-                    Debug.Log($"Canvas: Setup button {buttonIndex} ({(buttonIndex < buttonNames.Length ? buttonNames[buttonIndex] : "Unknown")})");
             }
         }
         
-        if (foundAllButtons)
-        {
-            Debug.Log("Canvas: All 8 action buttons found and connected successfully!");
-        }
-        else
+        if (!foundAllButtons)
         {
             Debug.LogWarning("Canvas: Some action buttons were not found. Check button names and hierarchy.");
         }
@@ -380,10 +359,6 @@ public class Canvas : MonoBehaviour
         // Check if MascotProfile is active before allowing button clicks
         if (mascotProfile != null && !mascotProfile.activeInHierarchy)
         {
-            if (debugButtonClicks)
-            {
-                Debug.Log("Canvas: Button click ignored - MascotProfile is not active!");
-            }
             return;
         }
         
@@ -399,11 +374,6 @@ public class Canvas : MonoBehaviour
             return;
         }
         
-        if (debugButtonClicks)
-        {
-            string buttonName = buttonIndex < buttonNames.Length ? buttonNames[buttonIndex] : "Unknown";
-            Debug.Log($"Canvas: Action button {buttonIndex} ({buttonName}) clicked!");
-        }
         
         // Play button click sound
         PlayButtonClickSound();
@@ -417,11 +387,6 @@ public class Canvas : MonoBehaviour
         // Play the corresponding narration
         PlayNarrationForButton(buttonIndex);
         
-        // Debug: Check if narration is playing
-        if (debugButtonClicks)
-        {
-            StartCoroutine(CheckNarrationStatus(buttonIndex));
-        }
         
         // Hide all props first
         if (mascotProps != null)
@@ -442,7 +407,7 @@ public class Canvas : MonoBehaviour
     {
         if (audioManager != null)
         {
-            audioManager.PlaySFX(buttonClickSoundName);
+            audioManager.PlaySFX("ButtonClick");
         }
         else
         {
@@ -471,10 +436,6 @@ public class Canvas : MonoBehaviour
         // Get the narration name based on button index
         string narrationName = buttonNames[buttonIndex];
         
-        if (debugButtonClicks)
-        {
-            Debug.Log($"Canvas: Playing narration '{narrationName}' for button {buttonIndex}");
-        }
         
         // Play narration by index instead of by name
         PlayNarrationByIndex(buttonIndex);
@@ -506,45 +467,11 @@ public class Canvas : MonoBehaviour
             return;
         }
         
-        if (debugButtonClicks)
-        {
-            Debug.Log($"Canvas: Loading and playing narration '{narrationElement.audioName}' from index {narrationIndex}");
-        }
         
         // Play the narration using the element directly
         audioManager.PlayNarrationElement(narrationElement);
     }
     
-    /// <summary>
-    /// Debug coroutine to check narration status
-    /// </summary>
-    private IEnumerator CheckNarrationStatus(int buttonIndex)
-    {
-        yield return new WaitForSeconds(0.1f); // Wait a bit for narration to start
-        
-        if (audioManager != null)
-        {
-            bool isPlaying = audioManager.IsNarrationPlaying();
-            string narrationName = buttonIndex < buttonNames.Length ? buttonNames[buttonIndex] : "Unknown";
-            Debug.Log($"Canvas Debug: Narration '{narrationName}' is playing: {isPlaying}");
-            
-            // Additional debugging for AudioSource
-            var narrationElement = audioManager.GetNarrationElement(narrationName);
-            if (narrationElement != null)
-            {
-                Debug.Log($"Canvas Debug: Narration element found - AudioFile: {(narrationElement.audioFile != null ? narrationElement.audioFile.name : "NULL")}, Volume: {narrationElement.volume}");
-            }
-            else
-            {
-                Debug.LogError($"Canvas Debug: Narration element '{narrationName}' not found in AudioManager!");
-            }
-            
-            if (!isPlaying)
-            {
-                Debug.LogWarning($"Canvas Debug: Narration '{narrationName}' failed to play. Check AudioSource settings!");
-            }
-        }
-    }
     #endregion
     
     #region Public Methods
@@ -566,38 +493,6 @@ public class Canvas : MonoBehaviour
         PlayNarrationForButton(buttonIndex);
     }
     
-    /// <summary>
-    /// Test method to directly test AudioSource (for debugging)
-    /// </summary>
-    [ContextMenu("Test Narration AudioSource")]
-    public void TestNarrationAudioSource()
-    {
-        if (audioManager != null)
-        {
-            // Get the narration AudioSource directly
-            var narrationSource = audioManager.GetComponentInChildren<AudioSource>();
-            if (narrationSource != null)
-            {
-                Debug.Log($"AudioSource found - Mute: {narrationSource.mute}, Volume: {narrationSource.volume}, IsPlaying: {narrationSource.isPlaying}");
-                Debug.Log($"AudioClip: {(narrationSource.clip != null ? narrationSource.clip.name : "NULL")}");
-                
-                // Try to play a test sound
-                if (narrationSource.clip != null)
-                {
-                    narrationSource.Play();
-                    Debug.Log("Test: Playing AudioSource directly");
-                }
-                else
-                {
-                    Debug.LogWarning("Test: No AudioClip assigned to AudioSource");
-                }
-            }
-            else
-            {
-                Debug.LogError("Test: No AudioSource found in AudioManager children");
-            }
-        }
-    }
     
     /// <summary>
     /// Public method to stop current action and return to Look Around

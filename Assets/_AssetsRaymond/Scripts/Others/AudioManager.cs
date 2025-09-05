@@ -47,7 +47,20 @@ public class AudioManager : MonoBehaviour
         // Get or create SFX AudioSource
         if (sfxSource == null)
         {
-            sfxSource = GetComponent<AudioSource>();
+            // First try to find SFX AudioSource in children
+            Transform sfxChild = transform.Find("SFX");
+            if (sfxChild != null)
+            {
+                sfxSource = sfxChild.GetComponent<AudioSource>();
+            }
+            
+            // If not found in children, try the main GameObject
+            if (sfxSource == null)
+            {
+                sfxSource = GetComponent<AudioSource>();
+            }
+            
+            // If still not found, create one
             if (sfxSource == null)
             {
                 sfxSource = gameObject.AddComponent<AudioSource>();
@@ -58,10 +71,29 @@ public class AudioManager : MonoBehaviour
         if (bgmSource == null)
         {
             // Look for BGM AudioSource in children
-            bgmSource = GetComponentInChildren<AudioSource>();
-            if (bgmSource == null || bgmSource == sfxSource)
+            Transform bgmChild = transform.Find("BGM");
+            if (bgmChild != null)
             {
-                // Create a new GameObject for BGM
+                bgmSource = bgmChild.GetComponent<AudioSource>();
+            }
+            
+            // If not found, try to find any AudioSource that's not the SFX source
+            if (bgmSource == null)
+            {
+                AudioSource[] allSources = GetComponentsInChildren<AudioSource>();
+                foreach (AudioSource source in allSources)
+                {
+                    if (source != sfxSource)
+                    {
+                        bgmSource = source;
+                        break;
+                    }
+                }
+            }
+            
+            // If still not found, create a new GameObject for BGM
+            if (bgmSource == null)
+            {
                 GameObject bgmObject = new GameObject("BGM AudioSource");
                 bgmObject.transform.SetParent(transform);
                 bgmSource = bgmObject.AddComponent<AudioSource>();
@@ -72,13 +104,23 @@ public class AudioManager : MonoBehaviour
         if (narrationSource == null)
         {
             // Look for Narration AudioSource in children
-            AudioSource[] allSources = GetComponentsInChildren<AudioSource>();
-            foreach (AudioSource source in allSources)
+            Transform narrationChild = transform.Find("Narration");
+            if (narrationChild != null)
             {
-                if (source != sfxSource && source != bgmSource)
+                narrationSource = narrationChild.GetComponent<AudioSource>();
+            }
+            
+            // If not found, try to find any AudioSource that's not SFX or BGM
+            if (narrationSource == null)
+            {
+                AudioSource[] allSources = GetComponentsInChildren<AudioSource>();
+                foreach (AudioSource source in allSources)
                 {
-                    narrationSource = source;
-                    break;
+                    if (source != sfxSource && source != bgmSource)
+                    {
+                        narrationSource = source;
+                        break;
+                    }
                 }
             }
             
@@ -95,13 +137,23 @@ public class AudioManager : MonoBehaviour
         if (voiceoverSource == null)
         {
             // Look for Voiceover AudioSource in children
-            AudioSource[] allSources = GetComponentsInChildren<AudioSource>();
-            foreach (AudioSource source in allSources)
+            Transform voiceoverChild = transform.Find("Voiceovers");
+            if (voiceoverChild != null)
             {
-                if (source != sfxSource && source != bgmSource && source != narrationSource)
+                voiceoverSource = voiceoverChild.GetComponent<AudioSource>();
+            }
+            
+            // If not found, try to find any AudioSource that's not SFX, BGM, or Narration
+            if (voiceoverSource == null)
+            {
+                AudioSource[] allSources = GetComponentsInChildren<AudioSource>();
+                foreach (AudioSource source in allSources)
                 {
-                    voiceoverSource = source;
-                    break;
+                    if (source != sfxSource && source != bgmSource && source != narrationSource)
+                    {
+                        voiceoverSource = source;
+                        break;
+                    }
                 }
             }
             
@@ -125,6 +177,12 @@ public class AudioManager : MonoBehaviour
         
         // Apply initial volume settings
         UpdateVolumeSettings();
+        
+        // Debug: Log which AudioSources were found
+        Debug.Log($"AudioManager: SFX Source = {(sfxSource != null ? sfxSource.name : "NULL")}");
+        Debug.Log($"AudioManager: BGM Source = {(bgmSource != null ? bgmSource.name : "NULL")}");
+        Debug.Log($"AudioManager: Narration Source = {(narrationSource != null ? narrationSource.name : "NULL")}");
+        Debug.Log($"AudioManager: Voiceover Source = {(voiceoverSource != null ? voiceoverSource.name : "NULL")}");
     }
     #endregion
 
@@ -157,11 +215,14 @@ public class AudioManager : MonoBehaviour
         if (element != null && element.audioFile != null && sfxSource != null)
         {
             ApplyAudioElementSettings(sfxSource, element);
-            sfxSource.PlayOneShot(element.audioFile, element.volume);
+            sfxSource.clip = element.audioFile;
+            sfxSource.volume = element.volume;
+            sfxSource.Play();
+            Debug.Log($"Playing SFX: {audioName} on {sfxSource.name} with volume {element.volume} - Clip assigned: {element.audioFile.name}");
         }
         else
         {
-            Debug.LogWarning($"SFX '{audioName}' not found or has no audio file assigned.");
+            Debug.LogWarning($"SFX '{audioName}' not found or has no audio file assigned. Element: {(element != null ? "Found" : "NULL")}, AudioFile: {(element != null && element.audioFile != null ? element.audioFile.name : "NULL")}, SFXSource: {(sfxSource != null ? sfxSource.name : "NULL")}");
         }
     }
     
@@ -172,11 +233,26 @@ public class AudioManager : MonoBehaviour
         {
             ApplyAudioElementSettings(sfxSource, element);
             sfxSource.PlayOneShot(element.audioFile, element.volume);
+            Debug.Log($"Playing SFX OneShot: {audioName} on {sfxSource.name} with volume {element.volume}");
         }
         else
         {
             Debug.LogWarning($"SFX '{audioName}' not found or has no audio file assigned.");
         }
+    }
+    
+    public void StopSFX()
+    {
+        if (sfxSource != null)
+        {
+            sfxSource.Stop();
+            Debug.Log("SFX stopped");
+        }
+    }
+    
+    public bool IsSFXPlaying()
+    {
+        return sfxSource != null && sfxSource.isPlaying;
     }
     #endregion
 
