@@ -178,6 +178,16 @@ public class MascotProps : MonoBehaviour
         }
     }
 
+    public void ShowGalaxy()
+    {        
+        ShowPropsForCourse("Galaxy");
+        
+        if (showDebugInfo)
+        {
+            Debug.Log("Show Galaxy");
+        }
+    }
+
     #endregion
     
     
