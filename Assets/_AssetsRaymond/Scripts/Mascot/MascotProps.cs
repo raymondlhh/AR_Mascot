@@ -20,8 +20,6 @@ public class MascotProps : MonoBehaviour
     [Header("Course Props Configuration")]
     public List<CourseProps> coursePropsList = new List<CourseProps>();
     
-    [Header("VRAR Props Control")]
-    
     
     [Header("Debug Info")]
     public bool showDebugInfo = true;
@@ -76,10 +74,13 @@ public class MascotProps : MonoBehaviour
         return props;
     }
     
+    #region Animation Events
     public void HideAllProps()
     {
         foreach (CourseProps course in coursePropsList)
         {
+            if (course == null) continue;
+            
             foreach (GameObject prop in course.props)
             {
                 if (prop != null)
@@ -99,6 +100,8 @@ public class MascotProps : MonoBehaviour
     {
         foreach (CourseProps course in coursePropsList)
         {
+            if (course == null) continue;
+            
             foreach (GameObject prop in course.props)
             {
                 if (prop != null)
@@ -154,19 +157,28 @@ public class MascotProps : MonoBehaviour
         }
     }
     
-    public void ShowOnlyVRARProps()
-    {
-        // Hide all props first
-        HideAllProps();
-        
-        // Then show only VRAR props
-        ShowPropsForCourse("VRAR");
+    public void ShowQuest3()
+    {        
+        ShowPropsForCourse("Quest3");
         
         if (showDebugInfo)
         {
-            Debug.Log("Showing only VRAR props - all other course props are hidden");
+            Debug.Log("Show Quest3");
         }
     }
+    
+
+    public void ShowSolarSystem()
+    {        
+        ShowPropsForCourse("SolarSystem");
+        
+        if (showDebugInfo)
+        {
+            Debug.Log("Show SolarSystem");
+        }
+    }
+
+    #endregion
     
     
     
