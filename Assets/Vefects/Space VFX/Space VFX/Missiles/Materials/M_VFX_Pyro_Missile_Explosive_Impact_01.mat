@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_VFX_Pyro_Missile_Explosive_Impact_01
+  m_Shader: {fileID: 4800000, guid: f25e358384f888743a3b713b6d35ac4f, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _EmissiveLUT:
+        m_Texture: {fileID: 2800000, guid: f57767c513f8ca64dbef45a46c4349a2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Flipbook:
+        m_Texture: {fileID: 2800000, guid: 54fa908065a6dc6428a7405ad5dedcf9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MotionVector:
+        m_Texture: {fileID: 2800000, guid: 772a9ed77783a0640aeccbaf515fe6d2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _Cull1: 2
+    - _DFEroMult: 1
+    - _DFEroPower: 0.69
+    - _DFEroSS: 0
+    - _DFEroSSS: 1
+    - _DFSSEro: 0
+    - _DFSSEroSmooth: 1
+    - _DepthFadeDistance: 1
+    - _DepthFadeMultiply: 33
+    - _DepthFadePower: 2
+    - _Dst1: 10
+    - _EmissiveHueShift: 0
+    - _EmissiveLUTOffset: 0
+    - _EmissiveLUTRange: 1
+    - _EmissiveMult: 1
+    - _EnvironmentReflections: 1
+    - _FlipbookColumns: 8
+    - _FlipbookRows: 8
+    - _FlipbookSpeed: 1
+    - _FlipbookStartFrame: 0
+    - _Float2: 10
+    - _MVInfluence: 0.001
+    - _MVOffsetFrame: 0.03
+    - _Maxnew: 1
+    - _Maxold: 1
+    - _Minnew: 0
+    - _Minold: 0
+    - _OpacityBoost: 1
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Smoothness: 0
+    - _Specular: 0
+    - _SpecularHighlights: 1
+    - _Src1: 5
+    - _ZTest1: 2
+    - _ZWrite1: 0
+    m_Colors:
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissiveTint: {r: 1, g: 1, b: 1, a: 0}
+    - _SmokeTint: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 0}
+  m_BuildTextureStacks: []

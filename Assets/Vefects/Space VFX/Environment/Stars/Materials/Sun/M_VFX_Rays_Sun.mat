@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_VFX_Rays_Sun
+  m_Shader: {fileID: 4800000, guid: de721c45c8fdafa45947b86219dbf063, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _LUT:
+        m_Texture: {fileID: 2800000, guid: b097e3c37e93ec94491c59feb9bd7383, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarNoisesTexture:
+        m_Texture: {fileID: 2800000, guid: 9023cdfd26c819647b664f7724d99f02, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 2800000, guid: b6b367b7f381c5c469717e8035128ce3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _Cull: 0
+    - _DFAmplitude: 33
+    - _DFPower: 1
+    - _DepthFade: 0.1
+    - _Dst: 10
+    - _EmissiveStrength: 500
+    - _FrBias: 0
+    - _FrPower: 5
+    - _FrScale: 1
+    - _LUTOffset: 0
+    - _LUTRange: 1
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Src: 5
+    - _ZTest: 2
+    - _ZWrite: 0
+    m_Colors:
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Noise01Pan: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _Noise01Scale: {r: 0.5, g: 0.02, b: 0, a: 0}
+    - _Noise02Pan: {r: -0.05, g: -0.05, b: 0, a: 0}
+    - _Noise02Scale: {r: 4, g: 0.3, b: 0, a: 0}
+    - _Noise03Pan: {r: 0, g: 0.025, b: 0, a: 0}
+    - _Noise03Scale: {r: 0.25, g: 0.01, b: 0, a: 0}
+    - _VerticalMaskUVOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _VerticalMaskUVScale: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
