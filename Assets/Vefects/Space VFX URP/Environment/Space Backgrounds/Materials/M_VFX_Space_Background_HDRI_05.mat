@@ -51,7 +51,7 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _BGDesaturation: 0
-    - _BGEmissiveIntensity: 1
+    - _BGEmissiveIntensity: 0.05
     - _BGNoiseDistortionScale: 1
     - _BGNoiseDistortionSize: 1234
     - _BGNoiseDistortionSpeed: 0.1

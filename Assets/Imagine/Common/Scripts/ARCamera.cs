@@ -84,7 +84,7 @@ namespace Imagine.WebAR
                 cam.clearFlags = CameraClearFlags.Depth;
                 cam.allowHDR = false;
                 var camData = GetComponent<UniversalAdditionalCameraData>();
-                //camData.renderPostProcessing = false;
+                camData.renderPostProcessing = false;
 
                 Debug.Log(cam.clearFlags + " " + camData.renderPostProcessing);
             }
