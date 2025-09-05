@@ -63,6 +63,7 @@ public class Canvas : MonoBehaviour
     [Header("Mascot Animation Control")]
     public MascotAnimations mascotController;
     public GameObject mascotProfile; // Reference to MascotProfile object
+    public MascotProps mascotProps; // Reference to MascotProps component
     
     [Header("Audio Management")]
     public AudioManager audioManager;
@@ -136,6 +137,12 @@ public class Canvas : MonoBehaviour
             mascotController = FindObjectOfType<MascotAnimations>();
         }
         
+        // Auto-find mascot props if not assigned
+        if (mascotProps == null)
+        {
+            mascotProps = FindObjectOfType<MascotProps>();
+        }
+        
         if (mascotController == null)
         {
             Debug.LogWarning("Canvas: No Mascot component found! Action buttons will not function.");
@@ -143,6 +150,15 @@ public class Canvas : MonoBehaviour
         else if (debugButtonClicks)
         {
             Debug.Log("Canvas: Mascot controller found and connected");
+        }
+        
+        if (mascotProps == null)
+        {
+            Debug.LogWarning("Canvas: No MascotProps component found! Props will not be hidden on button click.");
+        }
+        else if (debugButtonClicks)
+        {
+            Debug.Log("Canvas: MascotProps component found and connected");
         }
     }
     
@@ -360,6 +376,12 @@ public class Canvas : MonoBehaviour
         
         // Play button click sound
         PlayButtonClickSound();
+        
+        // Hide all props first
+        if (mascotProps != null)
+        {
+            mascotProps.HideAllProps();
+        }
         
         // Play the corresponding action animation
         mascotController.PlayActionAnimation(buttonIndex);
