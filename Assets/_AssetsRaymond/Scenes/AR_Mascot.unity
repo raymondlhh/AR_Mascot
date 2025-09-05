@@ -4539,8 +4539,9 @@ GameObject:
   m_Component:
   - component: {fileID: 543450651614461514}
   - component: {fileID: 919132147894150387}
-  - component: {fileID: 919132147894150386}
   - component: {fileID: 919132147894150385}
+  - component: {fileID: 919132147894150386}
+  - component: {fileID: 919132147894150388}
   m_Layer: 0
   m_Name: Mascot
   m_TagString: Untagged
@@ -4593,7 +4594,6 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 0aa059fe0680f3a48a06eede9738a1e7, type: 2}
     - {fileID: 2100000, guid: 328bb0370d217c3478bfb1ae0d20cd78, type: 2}
     - {fileID: 2100000, guid: f4daceb6bd3b70242a0d57b4152f921a, type: 2}
-  mascotProps: {fileID: 0}
 --- !u!95 &919132147894150387
 Animator:
   serializedVersion: 5
@@ -4615,6 +4615,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &919132147894150388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147894150384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb54012b491e21240902c4f07964d27c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propsAnimators:
+  - {fileID: 453530905}
 --- !u!1 &926167341169225490
 GameObject:
   m_ObjectHideFlags: 0

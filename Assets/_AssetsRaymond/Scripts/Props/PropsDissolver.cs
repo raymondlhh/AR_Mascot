@@ -14,9 +14,6 @@ public class PropsDissolver : MonoBehaviour
     public float dissolveDuration = 2;
     public float dissolveStrength;
     [SerializeField] private MaterialGroup[] targetMaterials;
-    
-    [Header("Mascot Props Integration")]
-    [SerializeField] private MascotProps mascotProps;
 
     private void Start()
     {

@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PropsAnimation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Props Animators")]
+    public List<Animator> propsAnimators = new List<Animator>();
+    
+
+    public void PlaySolarSystem()
     {
-        
+        foreach (Animator animator in propsAnimators)
+        {
+            if (animator != null)
+            {
+                animator.Play("SolarSystem");
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
