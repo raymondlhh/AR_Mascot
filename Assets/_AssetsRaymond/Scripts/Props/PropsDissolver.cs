@@ -14,6 +14,7 @@ public class PropsDissolver : MonoBehaviour
     public float dissolveDuration = 2;
     public float dissolveStrength;
     [SerializeField] private MaterialGroup[] targetMaterials;
+    [SerializeField] private AudioManager audioManager;
 
     private void Start()
     {
@@ -29,6 +30,12 @@ public class PropsDissolver : MonoBehaviour
                 if (group.materials[j] == null) continue;
                 group.materials[j].SetFloat("_DissolveStrength", dissolveStrength);
             }
+        }
+        
+        // Find AudioManager if not assigned
+        if (audioManager == null)
+        {
+            audioManager = FindObjectOfType<AudioManager>();
         }
     }
 
@@ -193,21 +200,25 @@ public class PropsDissolver : MonoBehaviour
     #region Animation Events
     public void DissolveAll()
     {
+        audioManager.PlaySFX("EnergyDisperse");
         StartCoroutine(Dissolve());
     }
 
     public void UnDissolveAll()
     {  
+        audioManager.PlaySFX("EnergyDisperse");
         StartCoroutine(UnDissolve());
     }
 
     public void DissolveQuest3()
     {
+        audioManager.PlaySFX("EnergyDisperse");
         StartCoroutine(DissolveGroup("Quest3"));
     }
 
     public void UnDissolveQuest3()
     {
+        audioManager.PlaySFX("EnergyDisperse");
         StartCoroutine(UnDissolveGroup("Quest3"));
     }
     #endregion

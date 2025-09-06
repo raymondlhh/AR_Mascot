@@ -407,7 +407,7 @@ public class Canvas : MonoBehaviour
     {
         if (audioManager != null)
         {
-            audioManager.PlaySFX("ButtonClick");
+            audioManager.PlayUI("ButtonClick");
         }
         else
         {

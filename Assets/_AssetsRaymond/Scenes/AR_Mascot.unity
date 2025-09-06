@@ -3082,6 +3082,134 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1847824961}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1875886915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1875886916}
+  - component: {fileID: 1875886917}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1875886916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875886915}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.633, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2083675375}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1875886917
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875886915}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1912560988
 GameObject:
   m_ObjectHideFlags: 0
@@ -3306,6 +3434,7 @@ Transform:
   - {fileID: 1178690369}
   - {fileID: 1766202662}
   - {fileID: 755555196}
+  - {fileID: 1875886916}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2083675376
@@ -3321,6 +3450,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxElements:
+  - audioName: Appear
+    audioFile: {fileID: 8300000, guid: d61ca90e7786ef643a3ca9573c72585c, type: 3}
+    volume: 1
+    spatialBlend: 0
+    minDistance: 1
+    maxDistance: 500
+    rolloffMode: 0
   - audioName: ButtonClick
     audioFile: {fileID: 8300000, guid: b5090beb25d4cd245a241fc0ef801fa7, type: 3}
     volume: 1
@@ -3328,10 +3464,10 @@ MonoBehaviour:
     minDistance: 1
     maxDistance: 500
     rolloffMode: 0
-  - audioName: Appear
-    audioFile: {fileID: 8300000, guid: d61ca90e7786ef643a3ca9573c72585c, type: 3}
+  - audioName: EnergyDisperse
+    audioFile: {fileID: 8300000, guid: 10d285b43214d5d4e8904545a4bb57f5, type: 3}
     volume: 1
-    spatialBlend: 0
+    spatialBlend: 1
     minDistance: 1
     maxDistance: 500
     rolloffMode: 0
@@ -3394,15 +3530,25 @@ MonoBehaviour:
     maxDistance: 0
     rolloffMode: 0
   voiceoverElements: []
+  uiElements:
+  - audioName: ButtonClick
+    audioFile: {fileID: 8300000, guid: b5090beb25d4cd245a241fc0ef801fa7, type: 3}
+    volume: 1
+    spatialBlend: 0
+    minDistance: 0
+    maxDistance: 0
+    rolloffMode: 0
   sfxSource: {fileID: 755555195}
   bgmSource: {fileID: 1766202661}
   narrationSource: {fileID: 1178690368}
   voiceoverSource: {fileID: 905963485}
+  uiSource: {fileID: 0}
   masterVolume: 1
   sfxVolume: 1
   bgmVolume: 1
   narrationVolume: 1
   voiceoverVolume: 1
+  uiVolume: 1
 --- !u!1 &22500807993016609
 GameObject:
   m_ObjectHideFlags: 0
@@ -4595,6 +4741,7 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 0aa059fe0680f3a48a06eede9738a1e7, type: 2}
     - {fileID: 2100000, guid: 328bb0370d217c3478bfb1ae0d20cd78, type: 2}
     - {fileID: 2100000, guid: f4daceb6bd3b70242a0d57b4152f921a, type: 2}
+  audioManager: {fileID: 2083675376}
 --- !u!95 &919132147894150387
 Animator:
   serializedVersion: 5

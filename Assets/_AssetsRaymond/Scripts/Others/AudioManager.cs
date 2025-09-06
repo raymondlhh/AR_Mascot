@@ -16,11 +16,15 @@ public class AudioManager : MonoBehaviour
     [Header("Voiceovers Audio Elements")]
     [SerializeField] private List<AudioElement> voiceoverElements = new List<AudioElement>();
     
+    [Header("UI Audio Elements")]
+    [SerializeField] private List<AudioElement> uiElements = new List<AudioElement>();
+    
     [Header("Audio Sources")]
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioSource bgmSource;
     [SerializeField] private AudioSource narrationSource;
     [SerializeField] private AudioSource voiceoverSource;
+    [SerializeField] private AudioSource uiSource;
     
     [Header("Global Volume Settings")]
     [Range(0f, 1f)]
@@ -33,6 +37,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private float narrationVolume = 1f;
     [Range(0f, 1f)]
     [SerializeField] private float voiceoverVolume = 1f;
+    [Range(0f, 1f)]
+    [SerializeField] private float uiVolume = 1f;
 
     #region Unity Lifecycle
     void Start()
@@ -166,6 +172,39 @@ public class AudioManager : MonoBehaviour
             }
         }
         
+        // Get or create UI AudioSource
+        if (uiSource == null)
+        {
+            // Look for UI AudioSource in children
+            Transform uiChild = transform.Find("UI");
+            if (uiChild != null)
+            {
+                uiSource = uiChild.GetComponent<AudioSource>();
+            }
+            
+            // If not found, try to find any AudioSource that's not SFX, BGM, Narration, or Voiceover
+            if (uiSource == null)
+            {
+                AudioSource[] allSources = GetComponentsInChildren<AudioSource>();
+                foreach (AudioSource source in allSources)
+                {
+                    if (source != sfxSource && source != bgmSource && source != narrationSource && source != voiceoverSource)
+                    {
+                        uiSource = source;
+                        break;
+                    }
+                }
+            }
+            
+            if (uiSource == null)
+            {
+                // Create a new GameObject for UI
+                GameObject uiObject = new GameObject("UI AudioSource");
+                uiObject.transform.SetParent(transform);
+                uiSource = uiObject.AddComponent<AudioSource>();
+            }
+        }
+        
         // Configure BGM source for looping
         bgmSource.loop = true;
         
@@ -175,6 +214,9 @@ public class AudioManager : MonoBehaviour
         // Configure Voiceover source (no looping by default)
         voiceoverSource.loop = false;
         
+        // Configure UI source (no looping by default)
+        uiSource.loop = false;
+        
         // Apply initial volume settings
         UpdateVolumeSettings();
         
@@ -183,6 +225,7 @@ public class AudioManager : MonoBehaviour
         Debug.Log($"AudioManager: BGM Source = {(bgmSource != null ? bgmSource.name : "NULL")}");
         Debug.Log($"AudioManager: Narration Source = {(narrationSource != null ? narrationSource.name : "NULL")}");
         Debug.Log($"AudioManager: Voiceover Source = {(voiceoverSource != null ? voiceoverSource.name : "NULL")}");
+        Debug.Log($"AudioManager: UI Source = {(uiSource != null ? uiSource.name : "NULL")}");
     }
     #endregion
 
@@ -204,6 +247,10 @@ public class AudioManager : MonoBehaviour
         if (voiceoverSource != null)
         {
             voiceoverSource.volume = masterVolume * voiceoverVolume;
+        }
+        if (uiSource != null)
+        {
+            uiSource.volume = masterVolume * uiVolume;
         }
     }
     #endregion
@@ -401,6 +448,70 @@ public class AudioManager : MonoBehaviour
     }
     #endregion
 
+    #region UI Methods
+    public void PlayUI(string audioName)
+    {
+        AudioElement element = uiElements.Find(x => x.audioName == audioName);
+        if (element != null && element.audioFile != null && uiSource != null)
+        {
+            ApplyAudioElementSettings(uiSource, element);
+            uiSource.clip = element.audioFile;
+            uiSource.volume = element.volume;
+            uiSource.Play();
+            Debug.Log($"Playing UI: {audioName} on {uiSource.name} with volume {element.volume} - Clip assigned: {element.audioFile.name}");
+        }
+        else
+        {
+            Debug.LogWarning($"UI '{audioName}' not found or has no audio file assigned. Element: {(element != null ? "Found" : "NULL")}, AudioFile: {(element != null && element.audioFile != null ? element.audioFile.name : "NULL")}, UISource: {(uiSource != null ? uiSource.name : "NULL")}");
+        }
+    }
+    
+    public void PlayUIOneShot(string audioName)
+    {
+        AudioElement element = uiElements.Find(x => x.audioName == audioName);
+        if (element != null && element.audioFile != null && uiSource != null)
+        {
+            ApplyAudioElementSettings(uiSource, element);
+            uiSource.PlayOneShot(element.audioFile, element.volume);
+            Debug.Log($"Playing UI OneShot: {audioName} on {uiSource.name} with volume {element.volume}");
+        }
+        else
+        {
+            Debug.LogWarning($"UI '{audioName}' not found or has no audio file assigned.");
+        }
+    }
+    
+    public void StopUI()
+    {
+        if (uiSource != null)
+        {
+            uiSource.Stop();
+            Debug.Log("UI stopped");
+        }
+    }
+    
+    public void PauseUI()
+    {
+        if (uiSource != null)
+        {
+            uiSource.Pause();
+        }
+    }
+    
+    public void ResumeUI()
+    {
+        if (uiSource != null)
+        {
+            uiSource.UnPause();
+        }
+    }
+    
+    public bool IsUIPlaying()
+    {
+        return uiSource != null && uiSource.isPlaying;
+    }
+    #endregion
+
     #region Utility Methods
     public AudioElement GetSFXElement(string audioName)
     {
@@ -429,6 +540,11 @@ public class AudioManager : MonoBehaviour
     public AudioElement GetVoiceoverElement(string audioName)
     {
         return voiceoverElements.Find(x => x.audioName == audioName);
+    }
+    
+    public AudioElement GetUIElement(string audioName)
+    {
+        return uiElements.Find(x => x.audioName == audioName);
     }
     #endregion
 
@@ -496,6 +612,18 @@ public class AudioManager : MonoBehaviour
         };
         voiceoverElements.Add(newElement);
     }
+    
+    public void AddUIElement(string name, AudioClip clip, float volume = 1f, float spatialBlend = 0f)
+    {
+        AudioElement newElement = new AudioElement
+        {
+            audioName = name,
+            audioFile = clip,
+            volume = Mathf.Clamp01(volume),
+            spatialBlend = Mathf.Clamp01(spatialBlend)
+        };
+        uiElements.Add(newElement);
+    }
     #endregion
 
     #region Volume Control Methods
@@ -529,10 +657,17 @@ public class AudioManager : MonoBehaviour
         UpdateVolumeSettings();
     }
     
+    public void SetUIVolume(float volume)
+    {
+        uiVolume = Mathf.Clamp01(volume);
+        UpdateVolumeSettings();
+    }
+    
     public float GetMasterVolume() => masterVolume;
     public float GetSFXVolume() => sfxVolume;
     public float GetBGMVolume() => bgmVolume;
     public float GetNarrationVolume() => narrationVolume;
     public float GetVoiceoverVolume() => voiceoverVolume;
+    public float GetUIVolume() => uiVolume;
     #endregion
 }
