@@ -1073,12 +1073,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2083675375}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &756647284 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4090694119782816258, guid: ce2201b222878fb46a3e76554e5f49ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 1847824961}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &849226636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2255,7 +2249,6 @@ GameObject:
   - component: {fileID: 1376905802}
   - component: {fileID: 1376905801}
   - component: {fileID: 1376905800}
-  - component: {fileID: 1376905804}
   - component: {fileID: 1376905805}
   m_Layer: 5
   m_Name: Canvas
@@ -2348,40 +2341,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1376905804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1376905799}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8771a5b35de697142ba39db796478a37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mascotController: {fileID: 1951464207}
-  mascotProfile: {fileID: 756647284}
-  mascotProps: {fileID: 777996343730948599}
-  audioManager: {fileID: 2083675376}
-  actionButtons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  buttonNames:
-  - FYP_Button
-  - VRAR_Button
-  - VideoGame_Button
-  - BoardGame_Button
-  - 3DModeling_Button
-  - 2D3DAnimation_Button
-  - GameEnvironment_Button
-  - VideoAudioProduction_Button
 --- !u!114 &1376905805
 MonoBehaviour:
   m_ObjectHideFlags: 0
