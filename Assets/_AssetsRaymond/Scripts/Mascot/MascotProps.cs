@@ -198,6 +198,16 @@ public class MascotProps : MonoBehaviour
         }
     }
 
+    public void ShowGraduation()
+    {        
+        ShowPropsForCourse("Graduation");
+    }
+
+    public void ShowScroll()
+    {        
+        ShowPropsForCourse("Scroll");
+    }
+
     #endregion
     
     

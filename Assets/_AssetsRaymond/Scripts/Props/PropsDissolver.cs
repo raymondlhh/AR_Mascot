@@ -221,6 +221,30 @@ public class PropsDissolver : MonoBehaviour
         audioManager.PlaySFX("EnergyDisperse");
         StartCoroutine(UnDissolveGroup("Quest3"));
     }
+
+    public void DissolveGraduation()
+    {
+        audioManager.PlaySFX("EnergyDisperse");
+        StartCoroutine(DissolveGroup("Graduation"));
+    }
+
+    public void UnDissolveGraduation()
+    {
+        audioManager.PlaySFX("EnergyDisperse");
+        StartCoroutine(UnDissolveGroup("Graduation"));
+    }
+
+    public void DissolveScroll()
+    {
+        audioManager.PlaySFX("EnergyDisperse");
+        StartCoroutine(DissolveGroup("Scroll"));
+    }
+
+    public void UnDissolveScroll()
+    {
+        audioManager.PlaySFX("EnergyDisperse");
+        StartCoroutine(UnDissolveGroup("Scroll"));
+    }
     #endregion
 
     
