@@ -496,7 +496,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 372465643}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2083675376}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayNarration
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: FYP_Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &372465643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,7 +768,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 608762307}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2083675376}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayNarration
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: FYP_Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &608762307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1533,7 +1557,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1082468968}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2083675376}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayNarration
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: FYP_Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1082468968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1654,7 +1690,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1128713129}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2083675376}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayNarration
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: FYP_Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1128713129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2011,7 +2059,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1308042268}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2083675376}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayNarration
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: FYP_Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1308042268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2132,7 +2192,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1369840919}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2083675376}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayNarration
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: FYP_Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1369840919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2283,16 +2355,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376905799}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8771a5b35de697142ba39db796478a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalScrollbar: {fileID: 0}
-  contentPanel: {fileID: 0}
-  viewport: {fileID: 0}
-  scrollSensitivity: 1
-  enableTouchScrolling: 1
   mascotController: {fileID: 1951464207}
   mascotProfile: {fileID: 756647284}
   mascotProps: {fileID: 777996343730948599}
@@ -2328,19 +2395,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonTargetPairs:
-  - button: {fileID: 0}
+  - button: {fileID: 1645242077}
     targetObject: {fileID: 919132149527326791}
-    buttonName: None
+    buttonName: FYP_Button
+    narrationName: FYP_Button
   - button: {fileID: 372465642}
     targetObject: {fileID: 777996343730948596}
     buttonName: VRAR_Button
+    narrationName: VRAR_Button
+  - button: {fileID: 1369840918}
+    targetObject: {fileID: 919132149527326791}
+    buttonName: VideoGame_Button
+    narrationName: VideoGame_Button
+  - button: {fileID: 608762306}
+    targetObject: {fileID: 919132149527326791}
+    buttonName: BoardGame_Button
+    narrationName: BoardGame_Button
   - button: {fileID: 1308042267}
     targetObject: {fileID: 4108254396366287363}
     buttonName: 3DModeling_Button
+    narrationName: 3DModeling_Button
   - button: {fileID: 1736710852}
     targetObject: {fileID: 3035456851726102949}
     buttonName: 2D3DAnimation_Button
+    narrationName: 2D3DAnimation_Button
+  - button: {fileID: 1128713128}
+    targetObject: {fileID: 919132149527326791}
+    buttonName: GameEnvironment_Button
+    narrationName: GameEnvironment_Button
+  - button: {fileID: 1082468967}
+    targetObject: {fileID: 919132149527326791}
+    buttonName: VideoAudioProduction_Button
+    narrationName: VideoAudioProduction_Button
+  - button: {fileID: 0}
+    targetObject: {fileID: 919132149527326791}
+    buttonName: None
+    narrationName: None
   showDebugInfo: 0
+  horizontalScrollbar: {fileID: 0}
+  contentPanel: {fileID: 0}
+  viewport: {fileID: 0}
+  scrollSensitivity: 1
+  enableTouchScrolling: 1
+  audioManager: {fileID: 0}
 --- !u!1 &1505575226
 GameObject:
   m_ObjectHideFlags: 0
@@ -2573,7 +2670,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1645242078}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2083675376}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayNarration
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: FYP_Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1645242078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2694,7 +2803,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1736710853}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2083675376}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayNarration
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: FYP_Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1736710853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3359,7 +3480,6 @@ GameObject:
   - component: {fileID: 1951464205}
   - component: {fileID: 1951464207}
   - component: {fileID: 1951464206}
-  - component: {fileID: 1951464208}
   m_Layer: 0
   m_Name: MascotController
   m_TagString: Untagged
@@ -3428,23 +3548,6 @@ MonoBehaviour:
   - VideoAudioProduction
   getHitAnimationName: getHit
   getHitAnimationDuration: 3
---- !u!114 &1951464208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1951464204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9887e03203e05d045a48c0ff1fe61887, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mascotNamesToHide:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  targetToShow: {fileID: 0}
 --- !u!1 &2066734955
 GameObject:
   m_ObjectHideFlags: 0
@@ -13995,7 +14098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &919132149607917639
 GameObject:
   m_ObjectHideFlags: 0

@@ -350,11 +350,14 @@ public class AudioManager : MonoBehaviour
         if (element != null && element.audioFile != null && narrationSource != null)
         {
             ApplyAudioElementSettings(narrationSource, element);
+            narrationSource.clip = element.audioFile;
+            narrationSource.volume = element.volume;
             narrationSource.Play();
+            Debug.Log($"Playing Narration: {audioName} on {narrationSource.name} with volume {element.volume} - Clip assigned: {element.audioFile.name}");
         }
         else
         {
-            Debug.LogWarning($"Narration '{audioName}' not found or has no audio file assigned.");
+            Debug.LogWarning($"Narration '{audioName}' not found or has no audio file assigned. Element: {(element != null ? "Found" : "NULL")}, AudioFile: {(element != null && element.audioFile != null ? element.audioFile.name : "NULL")}, NarrationSource: {(narrationSource != null ? narrationSource.name : "NULL")}");
         }
     }
     
