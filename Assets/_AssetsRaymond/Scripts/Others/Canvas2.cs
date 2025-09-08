@@ -35,6 +35,9 @@ public class Canvas2 : MonoBehaviour
     [Header("Audio Management")]
     public AudioManager audioManager;
     
+    [Header("Mascot Profile Control")]
+    public GameObject MascotProfile;
+    
     private ScrollRect scrollRect;
     private float contentWidth;
     private float viewportWidth;
@@ -353,22 +356,37 @@ public class Canvas2 : MonoBehaviour
         Debug.Log($"Canvas2: About to call PlayNarrationForButton for: {pressedPair.buttonName}");
         PlayNarrationForButton(pressedPair);
         
-        // Hide all target objects first
-        HideAllTargets();
-        
-        // Show the specific target object for this button
-        if (pressedPair.targetObject != null)
+        // Check if MascotProfile is active
+        if (MascotProfile != null && !MascotProfile.activeInHierarchy)
         {
-            pressedPair.targetObject.SetActive(true);
+            // If MascotProfile is not active, only show Mascot_Idle
+            ShowTargetByName("Mascot_Idle");
             
             if (showDebugInfo)
             {
-                Debug.Log($"Activated target: {pressedPair.targetObject.name}");
+                Debug.Log("MascotProfile is not active - showing only Mascot_Idle");
             }
         }
         else
         {
-            Debug.LogWarning($"Target object is null for button: {pressedPair.buttonName}");
+            // If MascotProfile is active or null, proceed with normal behavior
+            // Hide all target objects first
+            HideAllTargets();
+            
+            // Show the specific target object for this button
+            if (pressedPair.targetObject != null)
+            {
+                pressedPair.targetObject.SetActive(true);
+                
+                if (showDebugInfo)
+                {
+                    Debug.Log($"Activated target: {pressedPair.targetObject.name}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Target object is null for button: {pressedPair.buttonName}");
+            }
         }
     }
     

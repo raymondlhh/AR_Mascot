@@ -301,6 +301,8 @@ public class AudioManager : MonoBehaviour
     {
         return sfxSource != null && sfxSource.isPlaying;
     }
+    
+    
     #endregion
 
     #region BGM Methods
