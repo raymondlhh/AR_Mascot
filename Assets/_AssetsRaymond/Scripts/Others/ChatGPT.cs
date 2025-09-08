@@ -21,7 +21,7 @@ public class ChatGPT : MonoBehaviour
     private void Start()
     {
         chatHistory += aiIdentity + "\n";
-        api = new OpenAIClient(new OpenAIAuthentication("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"));
+        api = new OpenAIClient(new OpenAIAuthentication(""));
         button.onClick.AddListener(AskAI);
     }
 
