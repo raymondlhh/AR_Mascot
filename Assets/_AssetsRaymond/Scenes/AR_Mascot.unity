@@ -2864,27 +2864,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonTargetPairs:
-  - {button: {fileID: 1645242077}, targetObject: {fileID: 8995824443261464098}, buttonName: FYP_Button, narrationName: FYP_Button}
-  - {button: {fileID: 372465642}, targetObject: {fileID: 777996343730948596}, buttonName: VRAR_Button, narrationName: VRAR_Button}
-  - {button: {fileID: 1369840918}, targetObject: {fileID: 919132149527326791}, buttonName: VideoGame_Button, narrationName: VideoGame_Button}
-  - {button: {fileID: 608762306}, targetObject: {fileID: 919132149527326791}, buttonName: BoardGame_Button, narrationName: BoardGame_Button}
-  - {button: {fileID: 1308042267}, targetObject: {fileID: 5593549039928272566}, buttonName: 3DModeling_Button, narrationName: 3DModeling_Button}
-  - {button: {fileID: 1736710852}, targetObject: {fileID: 6130793456488551739}, buttonName: 2D3DAnimation_Button, narrationName: 2D3DAnimation_Button}
-  - {button: {fileID: 1128713128}, targetObject: {fileID: 919132149527326791}, buttonName: GameEnvironment_Button, narrationName: GameEnvironment_Button}
-  - {button: {fileID: 1082468967}, targetObject: {fileID: 919132149527326791}, buttonName: VideoAudioProduction_Button, narrationName: VideoAudioProduction_Button}
-  - {button: {fileID: 0}, targetObject: {fileID: 919132149527326791}, buttonName: None, narrationName: None}
+  - button: {fileID: 1645242077}
+    targetObject: {fileID: 8995824443261464098}
+    buttonName: FYP_Button
+    narrationName: FYP_Button
+  - button: {fileID: 372465642}
+    targetObject: {fileID: 777996343730948596}
+    buttonName: VRAR_Button
+    narrationName: VRAR_Button
+  - button: {fileID: 1369840918}
+    targetObject: {fileID: 919132149527326791}
+    buttonName: VideoGame_Button
+    narrationName: VideoGame_Button
+  - button: {fileID: 608762306}
+    targetObject: {fileID: 919132149527326791}
+    buttonName: BoardGame_Button
+    narrationName: BoardGame_Button
+  - button: {fileID: 1308042267}
+    targetObject: {fileID: 5593549039928272566}
+    buttonName: 3DModeling_Button
+    narrationName: 3DModeling_Button
+  - button: {fileID: 1736710852}
+    targetObject: {fileID: 6130793456488551739}
+    buttonName: 2D3DAnimation_Button
+    narrationName: 2D3DAnimation_Button
+  - button: {fileID: 1128713128}
+    targetObject: {fileID: 919132149527326791}
+    buttonName: GameEnvironment_Button
+    narrationName: GameEnvironment_Button
+  - button: {fileID: 1082468967}
+    targetObject: {fileID: 919132149527326791}
+    buttonName: VideoAudioProduction_Button
+    narrationName: VideoAudioProduction_Button
+  - button: {fileID: 0}
+    targetObject: {fileID: 919132149527326791}
+    buttonName: None
+    narrationName: None
   showDebugInfo: 0
-  horizontalScrollbar: {fileID: 0}
-  contentPanel: {fileID: 0}
-  viewport: {fileID: 0}
+  horizontalScrollbar: {fileID: 721361406}
+  contentPanel: {fileID: 32834977}
+  viewport: {fileID: 1376905803}
   scrollSensitivity: 1
   enableTouchScrolling: 1
   audioManager: {fileID: 2083675376}
   MascotProfile: {fileID: 100757993}
-  scrollRect: {fileID: 0}
-  contentWidth: 0
-  viewportWidth: 0
-  wasMascotProfileActive: 1
 --- !u!1 &1505575226
 GameObject:
   m_ObjectHideFlags: 0

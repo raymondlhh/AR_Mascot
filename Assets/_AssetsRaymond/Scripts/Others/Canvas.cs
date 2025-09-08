@@ -15,7 +15,7 @@ public class ButtonTargetPair
     public string narrationName;
 }
 
-public class Canva : MonoBehaviour
+public class Canvas : MonoBehaviour
 {
     [Header("Button Target Pairs")]
     public List<ButtonTargetPair> buttonTargetPairs = new List<ButtonTargetPair>();
