@@ -9,8 +9,12 @@ using TMPro;
 public class ChatGPT : MonoBehaviour
 {
     [SerializeField] private Button button;
-    [SerializeField] private TMP_InputField inputField;
+    //[SerializeField] private TMP_InputField inputField;
+    [SerializeField] private InputField inputField;
     [SerializeField] private TMP_Text displayText;
+    
+    [Header("API Configuration")]
+    public string apiKey;
 
     private string userInput;
     private string chatHistory;
@@ -21,7 +25,7 @@ public class ChatGPT : MonoBehaviour
     private void Start()
     {
         chatHistory += aiIdentity + "\n";
-        api = new OpenAIClient(new OpenAIAuthentication(""));
+        api = new OpenAIClient(new OpenAIAuthentication(apiKey));
         button.onClick.AddListener(AskAI);
     }
 
