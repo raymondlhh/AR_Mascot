@@ -41,6 +41,7 @@ public class Canvas2 : MonoBehaviour
     private ScrollRect scrollRect;
     private float contentWidth;
     private float viewportWidth;
+    private bool wasMascotProfileActive = true;
     
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,12 @@ public class Canvas2 : MonoBehaviour
         SetupScrolling();
         SetupAudioManager();
         ShowTargetByName("Mascot_Idle");
+        
+        // Initialize mascot profile state
+        if (MascotProfile != null)
+        {
+            wasMascotProfileActive = MascotProfile.activeInHierarchy;
+        }
     }
 
     // Update is called once per frame
@@ -68,6 +75,21 @@ public class Canvas2 : MonoBehaviour
             {
                 CalculateContentDimensions();
             }
+        }
+        
+        // Check if MascotProfile state has changed
+        if (MascotProfile != null)
+        {
+            bool isCurrentlyActive = MascotProfile.activeInHierarchy;
+            
+            // If MascotProfile was active but is now inactive, stop audio
+            if (wasMascotProfileActive && !isCurrentlyActive)
+            {
+                StopAllAudio();
+            }
+            
+            // Update the previous state
+            wasMascotProfileActive = isCurrentlyActive;
         }
     }
     
@@ -332,6 +354,27 @@ public class Canvas2 : MonoBehaviour
         Debug.Log($"Canvas2: PlayNarration call completed for '{pressedPair.narrationName}'");
     }
     
+    /// <summary>
+    /// Stops all audio when MascotProfile becomes inactive
+    /// </summary>
+    private void StopAllAudio()
+    {
+        if (audioManager != null)
+        {
+            audioManager.StopSFX();
+            audioManager.StopNarration();
+            
+            if (showDebugInfo)
+            {
+                Debug.Log("Canvas2: MascotProfile became inactive - stopped all audio");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Canvas2: Cannot stop audio - AudioManager is null!");
+        }
+    }
+    
     #endregion
     
     #region Button Event Handlers
@@ -349,27 +392,27 @@ public class Canvas2 : MonoBehaviour
             Debug.Log($"Button pressed: {pressedPair.buttonName}");
         }
         
-        // Play button click sound
+        // Always play button click sound
         PlayButtonClickSound();
-        
-        // Play narration if narration name is provided
-        Debug.Log($"Canvas2: About to call PlayNarrationForButton for: {pressedPair.buttonName}");
-        PlayNarrationForButton(pressedPair);
         
         // Check if MascotProfile is active
         if (MascotProfile != null && !MascotProfile.activeInHierarchy)
         {
-            // If MascotProfile is not active, only show Mascot_Idle
+            // If MascotProfile is not active, only show Mascot_Idle and don't play narration
             ShowTargetByName("Mascot_Idle");
             
             if (showDebugInfo)
             {
-                Debug.Log("MascotProfile is not active - showing only Mascot_Idle");
+                Debug.Log("MascotProfile is not active - showing only Mascot_Idle, narration disabled");
             }
         }
         else
         {
             // If MascotProfile is active or null, proceed with normal behavior
+            // Play narration if narration name is provided
+            Debug.Log($"Canvas2: About to call PlayNarrationForButton for: {pressedPair.buttonName}");
+            PlayNarrationForButton(pressedPair);
+            
             // Hide all target objects first
             HideAllTargets();
             
