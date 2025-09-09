@@ -415,11 +415,14 @@ public class AudioManager : MonoBehaviour
         if (element != null && element.audioFile != null && voiceoverSource != null)
         {
             ApplyAudioElementSettings(voiceoverSource, element);
+            voiceoverSource.clip = element.audioFile;
+            voiceoverSource.volume = element.volume;
             voiceoverSource.Play();
+            Debug.Log($"Playing Voiceover: {audioName} on {voiceoverSource.name} with volume {element.volume} - Clip assigned: {element.audioFile.name}");
         }
         else
         {
-            Debug.LogWarning($"Voiceover '{audioName}' not found or has no audio file assigned.");
+            Debug.LogWarning($"Voiceover '{audioName}' not found or has no audio file assigned. Element: {(element != null ? "Found" : "NULL")}, AudioFile: {(element != null && element.audioFile != null ? element.audioFile.name : "NULL")}, VoiceoverSource: {(voiceoverSource != null ? voiceoverSource.name : "NULL")}");
         }
     }
     

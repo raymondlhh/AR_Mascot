@@ -18,7 +18,7 @@ public class MascotController : MonoBehaviour
         }
     }
 
-    private void CheckMascotGameObjects()
+    public void CheckMascotGameObjects()
     {
         if (mascotGameObjects == null) return;
         

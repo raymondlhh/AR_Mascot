@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class TextController : MonoBehaviour
 {
     public Dialogue3DText mitaDialogue;
     // public Dialogue3DText playerDialogue;
@@ -17,16 +17,16 @@ public class GameController : MonoBehaviour
 
     private IEnumerator DialogueTest2()
     {
-        mitaDialogue.SetDialogueInfo("Hello, how are you?");
+        mitaDialogue.SetDialogueInfo("Hello I am Rendify");
         yield return new WaitForSeconds(interval);
 
-        mitaDialogue.SetDialogueInfo("Hello, how are you?");
+        mitaDialogue.SetDialogueInfo("Hello I am Rendify");
         yield return new WaitForSeconds(interval);
 
-        mitaDialogue.SetDialogueInfo("Hello, how are you?");
+        mitaDialogue.SetDialogueInfo("Hello I am Rendify");
         yield return new WaitForSeconds(interval);
 
-        mitaDialogue.SetDialogueInfo("Hello, how are you?");
+        mitaDialogue.SetDialogueInfo("Hello I am Rendify");
         yield return new WaitForSeconds(interval);
         
     }
