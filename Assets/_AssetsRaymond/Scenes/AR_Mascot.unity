@@ -7014,6 +7014,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 437830907466899194}
+  mascotGameObjects:
+  - {fileID: 8995824443261464098}
+  - {fileID: 777996343730948596}
+  - {fileID: 5593549039928272566}
+  - {fileID: 6130793456488551739}
+  - {fileID: 6784269131449953826}
+  - {fileID: 3657522180994455140}
   lookOnCamera: 1
 --- !u!1 &1962365396
 GameObject:
