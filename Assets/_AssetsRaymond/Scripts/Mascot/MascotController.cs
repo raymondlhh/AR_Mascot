@@ -12,10 +12,10 @@ public class MascotController : MonoBehaviour
         // Check if any mascot game object is active
         CheckMascotGameObjects();
         
-        if (lookOnCamera)
-        {
-            LookOnPlayerHandler();
-        }
+        // if (lookOnCamera)
+        // {
+        //     LookOnPlayerHandler();
+        // }
     }
 
     public void CheckMascotGameObjects()
@@ -42,9 +42,9 @@ public class MascotController : MonoBehaviour
 
         if (direction.magnitude < 0.01f) return;
 
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        targetRotation.x = 0;
-        targetRotation.z = 0;
+        // Calculate the Y rotation angle only
+        float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.Euler(0, angle, 0);
 
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5f * Time.deltaTime);
     }
