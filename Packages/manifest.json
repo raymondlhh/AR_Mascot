@@ -3,6 +3,7 @@
     "com.boxqkrtm.ide.cursor": "https://github.com/boxqkrtm/com.unity.ide.cursor.git",
     "com.gamelovers.mcp-unity": "https://github.com/CoderGamester/mcp-unity.git",
     "com.github.kou-yeung": "https://github.com/kou-yeung/WebGLInput.git?path=Assets/WebGLSupport",
+    "com.huggingface.api": "https://github.com/huggingface/unity-api.git",
     "com.openai.unity": "8.8.1",
     "com.ptc.vuforia.engine": "file:com.ptc.vuforia.engine-11.3.4.tgz",
     "com.unity.cloud.gltfast": "6.0.1",

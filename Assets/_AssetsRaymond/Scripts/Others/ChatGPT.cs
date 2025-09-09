@@ -9,8 +9,8 @@ using TMPro;
 public class ChatGPT : MonoBehaviour
 {
     [SerializeField] private Button button;
-    //[SerializeField] private TMP_InputField inputField;
-    [SerializeField] private InputField inputField;
+    [SerializeField] private TMP_InputField inputField;
+    //[SerializeField] private InputField inputField;
     [SerializeField] private TMP_Text displayText;
     [SerializeField] private string aiIdentity = "Act as an AI that responds to questions";
     
