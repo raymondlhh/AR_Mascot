@@ -16,7 +16,7 @@ public class Dialogue3DText : MonoBehaviour
     public float showTime = 3f;
     public float waitFadeOutTime = 2f;
     public float waitDestroyTime = 2f;
-    public bool lookOnPlayer;
+    public bool lookOnCamera;
     public Dialogue3DTheme theme;
 
     [Header("Symbol")]
@@ -27,20 +27,20 @@ public class Dialogue3DText : MonoBehaviour
 
     private float sizeHeight = 3.3f;
     private float sizeWidth = 3.3f;
-    private Transform globalDialogueRoot;
-    private Transform playerTransform;
+    [SerializeField] private Transform globalDialogueRoot;
+    [SerializeField] private Transform cameraTransform;
     private Transform dialogueRoot;
 
     private void Start()
     {
-        globalDialogueRoot = GameObject.Find("GlobalDialogueRoot").transform;
-        playerTransform = GameObject.Find("Player").transform;
+        // globalDialogueRoot = GameObject.Find("GlobalDialogueRoot").transform;
+        // playerTransform = GameObject.Find("ARCamera").transform;
         dialogueRoot = transform.GetChild(0);
     }
 
     private void Update()
     {
-        if (lookOnPlayer)
+        if (lookOnCamera)
         {
             LookOnPlayerHandler();
         }
@@ -48,7 +48,7 @@ public class Dialogue3DText : MonoBehaviour
 
     private void LookOnPlayerHandler()
     {
-        Vector3 direction = playerTransform.position - transform.position;
+        Vector3 direction = cameraTransform.position - transform.position;
 
         if (direction.magnitude < 0.01f) return;
 
