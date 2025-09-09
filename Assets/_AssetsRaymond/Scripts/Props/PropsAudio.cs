@@ -93,7 +93,7 @@ public class PropsAudio : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("AudioManager not found! Cannot play PenScribble sound.");
+            Debug.LogWarning("AudioManager not found! Cannot play Slime sound.");
         }
     }
 
@@ -105,7 +105,31 @@ public class PropsAudio : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("AudioManager not found! Cannot play PenScribble sound.");
+            Debug.LogWarning("AudioManager not found! Cannot play ItemPutDown sound.");
+        }
+    }
+
+    public void PlayAudioCorrect()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlaySFX("Correct");
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager not found! Cannot play Correct sound.");
+        }
+    }
+
+    public void PlayAudioWrong()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlaySFX("Wrong");
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager not found! Cannot play Wrong sound.");
         }
     }
     

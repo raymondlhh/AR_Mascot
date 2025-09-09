@@ -12,14 +12,13 @@ public class ChatGPT : MonoBehaviour
     //[SerializeField] private TMP_InputField inputField;
     [SerializeField] private InputField inputField;
     [SerializeField] private TMP_Text displayText;
+    [SerializeField] private string aiIdentity = "Act as an AI that responds to questions";
     
     [Header("API Configuration")]
     public string apiKey;
-
     private string userInput;
     private string chatHistory;
-    private string aiIdentity = "Act as an AI that responds to questions";
-
+   
     private OpenAIClient api;
 
     private void Start()
