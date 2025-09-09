@@ -2994,6 +2994,74 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &994575443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 994575444}
+  - component: {fileID: 994575446}
+  - component: {fileID: 994575445}
+  m_Layer: 0
+  m_Name: Mascot_BoardGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &994575444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994575443}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2066734956}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &994575445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994575443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9da0781c0edb6489145cffefac1238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioManager: {fileID: 2083675376}
+--- !u!114 &994575446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994575443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9887e03203e05d045a48c0ff1fe61887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mascotNamesToHide:
+  - {fileID: 8995824443261464098}
+  - {fileID: 777996343730948596}
+  - {fileID: 2008625074}
+  - {fileID: 994575443}
+  - {fileID: 5593549039928272566}
+  - {fileID: 6130793456488551739}
+  - {fileID: 6784269131449953826}
+  - {fileID: 3657522180994455140}
+  targetToShow: {fileID: 919132149527326791}
 --- !u!1 &1006652785
 GameObject:
   m_ObjectHideFlags: 0
@@ -5400,11 +5468,11 @@ MonoBehaviour:
     buttonName: VRAR_Button
     narrationName: VRAR_Button
   - button: {fileID: 1369840918}
-    targetObject: {fileID: 919132149527326791}
+    targetObject: {fileID: 2008625074}
     buttonName: VideoGame_Button
     narrationName: VideoGame_Button
   - button: {fileID: 608762306}
-    targetObject: {fileID: 919132149527326791}
+    targetObject: {fileID: 994575443}
     buttonName: BoardGame_Button
     narrationName: BoardGame_Button
   - button: {fileID: 1308042267}
@@ -8775,6 +8843,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1984679833}
   m_CullTransparentMesh: 1
+--- !u!1 &2008625074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2008625075}
+  - component: {fileID: 2008625077}
+  - component: {fileID: 2008625076}
+  m_Layer: 0
+  m_Name: Mascot_VideoGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2008625075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008625074}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2066734956}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2008625076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008625074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9da0781c0edb6489145cffefac1238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioManager: {fileID: 2083675376}
+--- !u!114 &2008625077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008625074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9887e03203e05d045a48c0ff1fe61887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mascotNamesToHide:
+  - {fileID: 8995824443261464098}
+  - {fileID: 777996343730948596}
+  - {fileID: 2008625074}
+  - {fileID: 994575443}
+  - {fileID: 5593549039928272566}
+  - {fileID: 6130793456488551739}
+  - {fileID: 6784269131449953826}
+  - {fileID: 3657522180994455140}
+  targetToShow: {fileID: 919132149527326791}
 --- !u!1 &2066734955
 GameObject:
   m_ObjectHideFlags: 0
@@ -8807,6 +8943,8 @@ Transform:
   - {fileID: 543450653193136893}
   - {fileID: 8618840786128106648}
   - {fileID: 108138213630186318}
+  - {fileID: 2008625075}
+  - {fileID: 994575444}
   - {fileID: 5110344897850162188}
   - {fileID: 6800194120565018497}
   - {fileID: 6155647149859714200}
