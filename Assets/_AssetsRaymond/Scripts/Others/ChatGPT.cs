@@ -11,6 +11,8 @@ public class ChatGPT : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private TMP_InputField inputField;
     //[SerializeField] private InputField inputField;
+
+    [SerializeField] private TMP_Dropdown dropDownText;
     [SerializeField] private TMP_Text displayText;
     [SerializeField] private string aiIdentity = "Act as an AI that responds to questions";
     
@@ -30,10 +32,11 @@ public class ChatGPT : MonoBehaviour
 
     private async void AskAI()
     {
-        button.enabled = false;
+        //button.enabled = false;
+        //dropDownText.enabled = false;
         inputField.enabled = false;
 
-        userInput = inputField.text;
+        userInput = dropDownText.options[dropDownText.value].text;
         chatHistory += $"{userInput}\n";
 
         displayText.text = "Thinking...";
