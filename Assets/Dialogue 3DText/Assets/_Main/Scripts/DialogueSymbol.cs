@@ -40,6 +40,9 @@ public class DialogueSymbol : MonoBehaviour
             case Dialogue3DTheme.ChibiMita:
                 break;
         }
+        
+        // Start the auto-destroy timer after fade in animation
+        StartAutoDestroyTimer();
     }
 
     public void JumpAnimation()
@@ -116,6 +119,14 @@ public class DialogueSymbol : MonoBehaviour
         Sequence sequence = DOTween.Sequence();
         sequence.Append(symbolTransform.DOScale(1.2f, 0.2f));
         sequence.Append(symbolTransform.DOScale(0f, 0.8f));
+    }
+    #endregion
+
+    #region Auto Destroy Timer
+    private void StartAutoDestroyTimer()
+    {
+        // Destroy the GameObject after 10 seconds
+        Destroy(gameObject, 10f);
     }
     #endregion
 }

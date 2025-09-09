@@ -22,6 +22,9 @@ public class ChatGPT : MonoBehaviour
     [SerializeField] private Dialogue3DText mascotDialogue;
     [SerializeField] private float interval;
     
+    [Header("Mascot Profile Control")]
+    [SerializeField] private GameObject MascotProfile;
+    
     
     
     
@@ -50,10 +53,26 @@ public class ChatGPT : MonoBehaviour
             displayCoroutine = null;
             audioManager.StopVoiceover(); // Stop any playing voiceover
         }
+        
+        // Check if MascotProfile is inactive and stop displayCoroutine if it's running
+        if (MascotProfile != null && !MascotProfile.activeInHierarchy && displayCoroutine != null)
+        {
+            StopCoroutine(displayCoroutine);
+            displayCoroutine = null;
+            audioManager.StopVoiceover(); // Stop any playing voiceover
+            Debug.Log("MascotProfile is inactive - stopped displayCoroutine");
+        }
     }
 
     private async void AskAI()
     {
+        // Check if MascotProfile is active before proceeding
+        if (MascotProfile != null && !MascotProfile.activeInHierarchy)
+        {
+            Debug.Log("MascotProfile is inactive - AskAI blocked");
+            return;
+        }
+        
         // Randomly show one of the three Mascot_QNA options
         string[] mascotOptions = { "Mascot_QNA1", "Mascot_QNA2", "Mascot_QNA4" };
         string randomMascot = mascotOptions[Random.Range(0, mascotOptions.Length)];
@@ -111,7 +130,7 @@ public class ChatGPT : MonoBehaviour
                 yield break; // Exit the coroutine immediately
             }
 
-            int chunkLength = Mathf.Min(18, fullText.Length - i);
+            int chunkLength = Mathf.Min(15, fullText.Length - i);
             string textChunk = fullText.Substring(i, chunkLength);
             
             // If this is not the last chunk and the chunk doesn't end with a space,

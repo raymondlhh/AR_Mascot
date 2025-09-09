@@ -392,8 +392,6 @@ public class Canvas : MonoBehaviour
             Debug.Log($"Button pressed: {pressedPair.buttonName}");
         }
         
-        // Always play button click sound
-        PlayButtonClickSound();
         
         // Check if MascotProfile is active
         if (MascotProfile != null && !MascotProfile.activeInHierarchy)
@@ -408,6 +406,7 @@ public class Canvas : MonoBehaviour
         }
         else
         {
+            PlayButtonClickSound();
             // If MascotProfile is active or null, proceed with normal behavior
             // Play narration if narration name is provided
             Debug.Log($"Canvas2: About to call PlayNarrationForButton for: {pressedPair.buttonName}");
