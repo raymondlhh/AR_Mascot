@@ -18,6 +18,7 @@ public class ChatGPT : MonoBehaviour
     [Header("Mascot Dialogue")]
     [SerializeField] private MascotController mascotController;
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private Canvas canvas;
     [SerializeField] private Dialogue3DText mascotDialogue;
     [SerializeField] private float interval;
     
@@ -53,6 +54,10 @@ public class ChatGPT : MonoBehaviour
 
     private async void AskAI()
     {
+        // Randomly show one of the three Mascot_QNA options
+        string[] mascotOptions = { "Mascot_QNA1", "Mascot_QNA2", "Mascot_QNA4" };
+        string randomMascot = mascotOptions[Random.Range(0, mascotOptions.Length)];
+        canvas.ShowTargetByName(randomMascot);
         // Check if mascot controller's lookOnCamera is false (no mascots active)
         if (mascotController == null || !mascotController.lookOnCamera)
         {
@@ -97,6 +102,7 @@ public class ChatGPT : MonoBehaviour
         int i = 0;
         while (i < fullText.Length)
         {
+            
             // Check if mascot controller's lookOnCamera is false (no mascots active)
             if (mascotController != null && !mascotController.lookOnCamera)
             {
