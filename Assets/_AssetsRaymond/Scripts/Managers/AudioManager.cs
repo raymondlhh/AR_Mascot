@@ -312,11 +312,14 @@ public class AudioManager : MonoBehaviour
         if (element != null && element.audioFile != null && bgmSource != null)
         {
             ApplyAudioElementSettings(bgmSource, element);
+            bgmSource.clip = element.audioFile;
+            bgmSource.volume = element.volume;
             bgmSource.Play();
+            Debug.Log($"Playing BGM: {audioName} on {bgmSource.name} with volume {element.volume} - Clip assigned: {element.audioFile.name}");
         }
         else
         {
-            Debug.LogWarning($"BGM '{audioName}' not found or has no audio file assigned.");
+            Debug.LogWarning($"BGM '{audioName}' not found or has no audio file assigned. Element: {(element != null ? "Found" : "NULL")}, AudioFile: {(element != null && element.audioFile != null ? element.audioFile.name : "NULL")}, BGMSource: {(bgmSource != null ? bgmSource.name : "NULL")}");
         }
     }
     
@@ -326,6 +329,47 @@ public class AudioManager : MonoBehaviour
         {
             bgmSource.Stop();
         }
+    }
+
+    public void DecreaseBGM()
+    {
+        if (bgmSource != null)
+        {
+            StartCoroutine(FadeOut(2f)); // Default 2 second fade
+        }
+    }
+    
+    public void FadeOutBGM(float fadeDuration)
+    {
+        if (bgmSource != null)
+        {
+            StartCoroutine(FadeOut(fadeDuration));
+        }
+    }
+    
+    private IEnumerator FadeOut(float fadeDuration)
+    {
+        if (bgmSource == null || !bgmSource.isPlaying)
+        {
+            yield break;
+        }
+        
+        float startVolume = bgmSource.volume;
+        float elapsedTime = 0f;
+        
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / fadeDuration;
+            bgmSource.volume = Mathf.Lerp(startVolume, 0f, progress);
+            yield return null;
+        }
+        
+        // Ensure volume is exactly 0 and stop the audio
+        bgmSource.volume = 0f;
+        bgmSource.Stop();
+        
+        Debug.Log($"BGM faded out and stopped over {fadeDuration} seconds");
     }
     
     public void PauseBGM()

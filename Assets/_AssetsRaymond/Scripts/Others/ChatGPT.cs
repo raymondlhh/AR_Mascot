@@ -69,6 +69,7 @@ public class ChatGPT : MonoBehaviour
 
     private async void AskAI()
     {
+        audioManager.StopBGM();
         // Check if display text is still being processed
         if (!isDisplayTextFinished)
         {

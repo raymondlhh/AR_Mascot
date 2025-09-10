@@ -132,6 +132,102 @@ public class PropsAudio : MonoBehaviour
             Debug.LogWarning("AudioManager not found! Cannot play Wrong sound.");
         }
     }
+
+    public void PlayAudioMagicAttack()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlaySFX("MagicAttack");
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager not found! Cannot play MaggicAttack sound.");
+        }
+    }
+
+    public void PlayAudioChair()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlaySFX("Chair");
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager not found! Cannot play Chair sound.");
+        }
+    }
+
+    public void PlayBGMForScene()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlaySFX("Chair");
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager not found! Cannot play Chair sound.");
+        }
+    }
+
+    public void PlayGameMusic()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlayBGM("GameMusic");
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager not found! Cannot play GameMusic sound.");
+        }
+    }
+
+    public void DecreaseBGM()
+    {
+        if (audioManager != null)
+        {
+            audioManager.DecreaseBGM();
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager not found! Cannot play GameMusic sound.");
+        }
+    }
+
+    public void PlayAudioDing()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlaySFX("Ding");
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager not found! Cannot play Ding sound.");
+        }
+    }
+
+    public void PlayAudioThrow()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlaySFX("Throw");
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager not found! Cannot play Throw sound.");
+        }
+    }
+
+    public void PlayAudioRecord()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlaySFX("Record");
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager not found! Cannot play Record sound.");
+        }
+    }
     
     // Stop pen scribble sound
     public void StopSFX()

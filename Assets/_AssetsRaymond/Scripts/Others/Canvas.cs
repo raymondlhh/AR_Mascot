@@ -363,6 +363,7 @@ public class Canvas : MonoBehaviour
         {
             audioManager.StopSFX();
             audioManager.StopNarration();
+            audioManager.StopBGM();
             
             if (showDebugInfo)
             {
@@ -385,6 +386,8 @@ public class Canvas : MonoBehaviour
     /// <param name="pressedPair">The button-target pair that was pressed</param>
     private void OnButtonPressed(ButtonTargetPair pressedPair)
     {
+        audioManager.StopBGM();
+        audioManager.StopNarration();
         Debug.Log($"Canvas2: OnButtonPressed called for button: {pressedPair.buttonName}");
         
         if (showDebugInfo)
