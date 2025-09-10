@@ -5837,6 +5837,7 @@ MonoBehaviour:
   canvas: {fileID: 1376905805}
   mascotDialogue: {fileID: 2028803896755448913}
   interval: 2
+  isDisplayTextFinished: 1
   MascotProfile: {fileID: 100757993}
   apiKey: 
 --- !u!1 &1406295656
@@ -9012,6 +9013,13 @@ MonoBehaviour:
     audioFile: {fileID: 8300000, guid: b5090beb25d4cd245a241fc0ef801fa7, type: 3}
     volume: 1
     spatialBlend: 0
+    minDistance: 1
+    maxDistance: 500
+    rolloffMode: 0
+  - audioName: ButtonClick2
+    audioFile: {fileID: 8300000, guid: 8384d53660f54f24dab430eca7473d1d, type: 3}
+    volume: 1
+    spatialBlend: 1
     minDistance: 1
     maxDistance: 500
     rolloffMode: 0
@@ -67453,7 +67461,7 @@ Transform:
   m_GameObject: {fileID: 2393138326876913623}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.7}
+  m_LocalPosition: {x: 0.066, y: -0.282, z: -0.243}
   m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_ConstrainProportionsScale: 1
   m_Children: []

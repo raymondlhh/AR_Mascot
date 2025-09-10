@@ -21,6 +21,7 @@ public class ChatGPT : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private Dialogue3DText mascotDialogue;
     [SerializeField] private float interval;
+    [SerializeField] private bool isDisplayTextFinished = true;
     
     [Header("Mascot Profile Control")]
     [SerializeField] private GameObject MascotProfile;
@@ -52,6 +53,7 @@ public class ChatGPT : MonoBehaviour
             StopCoroutine(displayCoroutine);
             displayCoroutine = null;
             audioManager.StopVoiceover(); // Stop any playing voiceover
+            isDisplayTextFinished = true; // Mark as finished when stopped
         }
         
         // Check if MascotProfile is inactive and stop displayCoroutine if it's running
@@ -60,18 +62,28 @@ public class ChatGPT : MonoBehaviour
             StopCoroutine(displayCoroutine);
             displayCoroutine = null;
             audioManager.StopVoiceover(); // Stop any playing voiceover
+            isDisplayTextFinished = true; // Mark as finished when stopped
             Debug.Log("MascotProfile is inactive - stopped displayCoroutine");
         }
     }
 
     private async void AskAI()
     {
+        // Check if display text is still being processed
+        if (!isDisplayTextFinished)
+        {
+            Debug.Log("Display text is still being processed - AskAI blocked");
+            return;
+        }
+
         // Check if MascotProfile is active before proceeding
         if (MascotProfile != null && !MascotProfile.activeInHierarchy)
         {
             Debug.Log("MascotProfile is inactive - AskAI blocked");
             return;
         }
+
+        audioManager.PlaySFX("ButtonClick2");
         
         // Randomly show one of the three Mascot_QNA options
         string[] mascotOptions = { "Mascot_QNA1", "Mascot_QNA2", "Mascot_QNA4" };
@@ -107,6 +119,7 @@ public class ChatGPT : MonoBehaviour
         
         // Split text into chunks of 18 characters or less and call MascotDialogue for each
         string fullText = result.FirstChoice.Message.Content.ToString();
+        isDisplayTextFinished = false; // Set to false when starting display
         displayCoroutine = StartCoroutine(DisplayTextInChunks(fullText));
         chatHistory += $"{result.FirstChoice.Message.Content.ToString()}\n";
 
@@ -127,6 +140,7 @@ public class ChatGPT : MonoBehaviour
             {
                 Debug.Log("No mascots are active. Stopping DisplayTextInChunks.");
                 audioManager.StopVoiceover(); // Stop any playing voiceover
+                isDisplayTextFinished = true; // Mark as finished when stopped
                 yield break; // Exit the coroutine immediately
             }
 
@@ -173,6 +187,9 @@ public class ChatGPT : MonoBehaviour
             // Wait for the interval before processing the next chunk
             yield return new WaitForSeconds(interval);
         }
+        
+        // Mark display text as finished
+        isDisplayTextFinished = true;
     }
 
 }
