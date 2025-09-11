@@ -51,7 +51,7 @@
       "url": "https://package.openupm.com"
     },
     "com.ptc.vuforia.engine": {
-      "version": "file:com.ptc.vuforia.engine-11.3.4.tgz",
+      "version": "file:com.ptc.vuforia.engine-11.4.4.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {

@@ -22,6 +22,7 @@ public class ChatGPT : MonoBehaviour
     [SerializeField] private Dialogue3DText mascotDialogue;
     [SerializeField] private float interval;
     [SerializeField] private bool isDisplayTextFinished = true;
+    [SerializeField] private bool is3DText = true;
     
     [Header("Mascot Profile Control")]
     [SerializeField] private GameObject MascotProfile;
@@ -85,11 +86,7 @@ public class ChatGPT : MonoBehaviour
         }
 
         audioManager.PlaySFX("ButtonClick2");
-        
-        // Randomly show one of the three Mascot_QNA options
-        string[] mascotOptions = { "Mascot_QNA1", "Mascot_QNA2", "Mascot_QNA4" };
-        string randomMascot = mascotOptions[Random.Range(0, mascotOptions.Length)];
-        canvas.ShowTargetByName(randomMascot);
+        canvas.ShowTargetByName("Mascot_Idle");
         // Check if mascot controller's lookOnCamera is false (no mascots active)
         if (mascotController == null || !mascotController.lookOnCamera)
         {
@@ -118,10 +115,22 @@ public class ChatGPT : MonoBehaviour
 
         displayText.text = result.FirstChoice.Message.Content.ToString();
         
+        
         // Split text into chunks of 18 characters or less and call MascotDialogue for each
         string fullText = result.FirstChoice.Message.Content.ToString();
         isDisplayTextFinished = false; // Set to false when starting display
-        displayCoroutine = StartCoroutine(DisplayTextInChunks(fullText));
+        
+        // Only start DisplayTextInChunks coroutine if is3DText is true
+        if (is3DText)
+        {
+            displayCoroutine = StartCoroutine(DisplayTextInChunks(fullText));
+        }
+        else
+        {
+            // If 3D text is disabled, use regular text display with typing effect
+            displayCoroutine = StartCoroutine(DisplayTextInChunksRegular(fullText));
+        }
+        
         chatHistory += $"{result.FirstChoice.Message.Content.ToString()}\n";
 
         button.enabled = true;
@@ -191,6 +200,75 @@ public class ChatGPT : MonoBehaviour
         
         // Mark display text as finished
         isDisplayTextFinished = true;
+    }
+
+    private IEnumerator DisplayTextInChunksRegular(string fullText)
+    {
+        displayText.text = ""; // Clear the display text initially
+        
+        // Reset text color to original (in case it was faded out from previous cycle)
+        Color originalColor = displayText.color;
+        displayText.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+        
+        for (int i = 0; i < fullText.Length; i++)
+        {
+            // Check if mascot controller's lookOnCamera is false (no mascots active)
+            if (mascotController != null && !mascotController.lookOnCamera)
+            {
+                Debug.Log("No mascots are active. Stopping DisplayTextInChunksRegular.");
+                audioManager.StopVoiceover(); // Stop any playing voiceover
+                isDisplayTextFinished = true; // Mark as finished when stopped
+                yield break; // Exit the coroutine immediately
+            }
+
+            char currentChar = fullText[i];
+            
+            // Play typing sound for each letter
+            audioManager.PlayVoiceover("Typing");
+            
+            // Add the current character to the display text
+            displayText.text += currentChar;
+            
+            // If it's a space, wait a bit longer for word separation
+            if (currentChar == ' ')
+            {
+                yield return new WaitForSeconds(0.3f); // Longer pause for spaces
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.1f); // Shorter pause for letters
+            }
+            
+            // Stop voiceover after each character
+            audioManager.StopVoiceover();
+        }
+        
+        // Wait 3 seconds after typing is finished
+        yield return new WaitForSeconds(3f);
+        
+        // Fade out the text
+        yield return StartCoroutine(FadeOutText());
+        
+        // Mark display text as finished
+        isDisplayTextFinished = true;
+    }
+
+    private IEnumerator FadeOutText()
+    {
+        Color originalColor = displayText.color;
+        float fadeTime = 1f; // Fade duration
+        float elapsedTime = 0f;
+        
+        while (elapsedTime < fadeTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeTime);
+            displayText.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+        
+        // Ensure text is completely transparent
+        displayText.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
     }
 
 }

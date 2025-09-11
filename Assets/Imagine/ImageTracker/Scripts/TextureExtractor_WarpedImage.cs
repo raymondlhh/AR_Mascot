@@ -11,8 +11,10 @@ namespace Imagine.WebAR
 {
     public class TextureExtractor_WarpedImage : MonoBehaviour
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
         [DllImport("__Internal")] private static extern bool WebGLIsCameraStarted();
         [DllImport("__Internal")] private static extern void GetWebGLWarpedTexture(string targetId, int textureId, int resolution);
+#endif
 
         private ARCamera arCamera;
 
@@ -44,11 +46,16 @@ namespace Imagine.WebAR
 
             isInitializing = true;
 
+#if UNITY_WEBGL && !UNITY_EDITOR
             while(!WebGLIsCameraStarted()){
                 Debug.Log("Unity Waiting for WebGLIsCameraStarted");
                 yield return null;
             }
             Debug.Log("Unity WebGLIsCameraStarted");
+#else
+            // For non-WebGL platforms, skip the WebGL camera check
+            Debug.Log("Unity Skipping WebGL camera check for non-WebGL platform");
+#endif
 
 
             warpedTexture = new Texture2D(outputTexture.width, outputTexture.height);
@@ -58,6 +65,7 @@ namespace Imagine.WebAR
 
             Debug.Log("Unity Initialized warpedTextureId = " + warpedTextureId);
 
+            yield break;
         }
 
         void OnDisable(){
@@ -107,7 +115,12 @@ namespace Imagine.WebAR
             //Debug.Log("Unity Update ExtractTexture()");
 
             var resolution = outputTexture.width;
+#if UNITY_WEBGL && !UNITY_EDITOR
             GetWebGLWarpedTexture(targetId, warpedTextureId, resolution);
+#else
+            // For non-WebGL platforms, skip the WebGL texture extraction
+            Debug.Log("Unity Skipping WebGL texture extraction for non-WebGL platform");
+#endif
 
             Graphics.Blit(warpedTexture, outputTexture);
         }

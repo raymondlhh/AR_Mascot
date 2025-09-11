@@ -22,12 +22,14 @@ namespace Imagine.WebAR
 
     public class ImageTracker : MonoBehaviour
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
         [DllImport("__Internal")] private static extern void StartWebGLiTracker(string ids, string name);
         [DllImport("__Internal")] private static extern void StopWebGLiTracker();
         [DllImport("__Internal")] private static extern float SetWebGLiTrackerSettings(string settings);
         [DllImport("__Internal")] private static extern bool IsWebGLiTrackerReady();
         [DllImport("__Internal")] private static extern float DebugImageTarget(string id);
         [DllImport("__Internal")] private static extern bool IsWebGLImageTracked(string id);
+#endif
         
 
         [SerializeField] private ARCamera trackerCam;
@@ -164,7 +166,12 @@ namespace Imagine.WebAR
 
         public bool IsImageTracked(string id)
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
             return IsWebGLImageTracked(id);
+#else
+            // For non-WebGL platforms, return false
+            return false;
+#endif
         }
 
         void OnTrackingFound(string id)
@@ -317,11 +324,15 @@ namespace Imagine.WebAR
                     if(debugImageTargetIndex >= imageTargets.Count)
                     {
                         debugImageTargetIndex = 0;
+#if UNITY_WEBGL && !UNITY_EDITOR
                         DebugImageTarget("");
+#endif
                     }
                     else
                     {
+#if UNITY_WEBGL && !UNITY_EDITOR
                         DebugImageTarget(imageTargets[debugImageTargetIndex].id);
+#endif
                         debugImageTargetIndex++;
                     }
                 }

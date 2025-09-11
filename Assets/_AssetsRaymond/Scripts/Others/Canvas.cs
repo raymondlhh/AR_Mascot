@@ -38,6 +38,10 @@ public class Canvas : MonoBehaviour
     [Header("Mascot Profile Control")]
     public GameObject MascotProfile;
     
+    [Header("Text Fade Settings")]
+    public TMPro.TextMeshProUGUI textToFade;
+    public float fadeOutDuration = 1f;
+    
     private ScrollRect scrollRect;
     private float contentWidth;
     private float viewportWidth;
@@ -82,10 +86,16 @@ public class Canvas : MonoBehaviour
         {
             bool isCurrentlyActive = MascotProfile.activeInHierarchy;
             
-            // If MascotProfile was active but is now inactive, stop audio
+            // If MascotProfile was active but is now inactive, stop audio and fade out text
             if (wasMascotProfileActive && !isCurrentlyActive)
             {
                 StopAllAudio();
+                
+                // Fade out text if it's not already faded out
+                if (textToFade != null && textToFade.color.a > 0f)
+                {
+                    StartCoroutine(FadeOutText());
+                }
             }
             
             // Update the previous state
@@ -390,6 +400,12 @@ public class Canvas : MonoBehaviour
         audioManager.StopNarration();
         Debug.Log($"Canvas2: OnButtonPressed called for button: {pressedPair.buttonName}");
         
+        // Start fade out coroutine when button is clicked (only if text is not already faded out)
+        if (textToFade != null && textToFade.color.a > 0f)
+        {
+            StartCoroutine(FadeOutText());
+        }
+        
         if (showDebugInfo)
         {
             Debug.Log($"Button pressed: {pressedPair.buttonName}");
@@ -573,6 +589,36 @@ public class Canvas : MonoBehaviour
         }
         
         Debug.LogWarning($"Button-target pair not found with name: {buttonName}");
+    }
+    
+    #endregion
+    
+    #region Text Fade Functions
+    
+    /// <summary>
+    /// Fades out the specified text over time
+    /// </summary>
+    private IEnumerator FadeOutText()
+    {
+        if (textToFade == null)
+        {
+            Debug.LogWarning("Canvas: No text assigned to fade out!");
+            yield break;
+        }
+        
+        Color originalColor = textToFade.color;
+        float elapsedTime = 0f;
+        
+        while (elapsedTime < fadeOutDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeOutDuration);
+            textToFade.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+        
+        // Ensure text is completely transparent
+        textToFade.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
     }
     
     #endregion

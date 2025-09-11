@@ -13,12 +13,20 @@ namespace Imagine.WebAR.Editor
         [PostProcessBuild]
         public static void OnPostProcessBuild(BuildTarget target, string buildPath)
         {
-            Debug.Log(buildPath);
+            // Only process WebGL builds
+            if (target != BuildTarget.WebGL)
+            {
+                Debug.Log("PostProcessBuild: Skipping non-WebGL build target: " + target);
+                return;
+            }
+
+            Debug.Log("PostProcessBuild: Processing WebGL build at " + buildPath);
             var targetsHtml = "";
 
-            if(!Directory.Exists(buildPath + "/targets"))
+            string targetsPath = buildPath + "/targets";
+            if(!Directory.Exists(targetsPath))
             {
-                Directory.CreateDirectory(buildPath + "/targets");
+                Directory.CreateDirectory(targetsPath);
             }
 
             foreach (var info in ImageTrackerGlobalSettings.Instance.imageTargetInfos)
@@ -27,14 +35,21 @@ namespace Imagine.WebAR.Editor
                 var fileName = Path.GetFileName(src);
                 Debug.Log(info.id + "->" + src);
 
-                File.Copy(src, buildPath + "/targets/" + fileName, true);
+                File.Copy(src, targetsPath + "/" + fileName, true);
 
                 targetsHtml += ("\t\t<imagetarget id='" + info.id + "' src='targets/" + fileName + "'></imagetarget>\n");
             }
 
             Debug.Log(targetsHtml);
 
-            var lines = File.ReadAllLines(buildPath + "/index.html").ToList();
+            string indexPath = buildPath + "/index.html";
+            if (!File.Exists(indexPath))
+            {
+                Debug.LogError("PostProcessBuild: index.html not found at " + indexPath);
+                return;
+            }
+
+            var lines = File.ReadAllLines(indexPath).ToList();
             var html = "";
             foreach(var line in lines)
             {
@@ -47,7 +62,7 @@ namespace Imagine.WebAR.Editor
                 html += line + "\n";
             }
             html = html.Replace("<!--IMAGETARGETS-->", "<!--IMAGETARGETS-->\n" + targetsHtml);
-            File.WriteAllText(buildPath + "/index.html", html);
+            File.WriteAllText(indexPath, html);
         }
     }
 }

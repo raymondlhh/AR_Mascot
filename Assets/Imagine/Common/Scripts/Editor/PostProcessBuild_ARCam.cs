@@ -13,7 +13,21 @@ namespace Imagine.WebAR.Editor
         [PostProcessBuild]
         public static void OnPostProcessBuild(BuildTarget target, string buildPath)
         {
-            string[] htmlLines = File.ReadAllLines(buildPath + "/index.html");
+            // Only process WebGL builds
+            if (target != BuildTarget.WebGL)
+            {
+                Debug.Log("PostProcessBuild_ARCam: Skipping non-WebGL build target: " + target);
+                return;
+            }
+
+            string indexPath = buildPath + "/index.html";
+            if (!File.Exists(indexPath))
+            {
+                Debug.LogError("PostProcessBuild_ARCam: index.html not found at " + indexPath);
+                return;
+            }
+
+            string[] htmlLines = File.ReadAllLines(indexPath);
             
             var facingMode = ARCameraGlobalSettings.Instance.facingMode;
             if(facingMode == ARCameraGlobalSettings.FacingMode.DONT_OVERRIDE)
@@ -29,7 +43,7 @@ namespace Imagine.WebAR.Editor
             //     htmlLines = ReplaceFacingMode(htmlLines, "");
             // }
 
-            File.WriteAllLines(buildPath + "/index.html", htmlLines); 
+            File.WriteAllLines(indexPath, htmlLines); 
         }
 
         static string[] ReplaceFacingMode(string[] lines, string facingMode){
