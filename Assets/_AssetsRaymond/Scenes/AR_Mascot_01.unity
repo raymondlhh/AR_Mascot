@@ -4841,6 +4841,8 @@ MonoBehaviour:
     targetObject: {fileID: 919132149527326791}
     buttonName: None
     narrationName: None
+  CoverSwitchButton: {fileID: 0}
+  CoverSendButton: {fileID: 0}
   showDebugInfo: 0
   horizontalScrollbar: {fileID: 721361406}
   contentPanel: {fileID: 32834977}
@@ -4849,6 +4851,7 @@ MonoBehaviour:
   enableTouchScrolling: 1
   audioManager: {fileID: 2083675376}
   MascotProfile: {fileID: 100757993}
+  chatGPT: {fileID: 0}
   textToFade: {fileID: 375706862}
   fadeOutDuration: 1
 --- !u!1 &1378588523
