@@ -13,6 +13,8 @@ public class ButtonTargetPair
     
     [Header("Audio Settings")]
     public string narrationName;
+
+    
 }
 
 public class Canvas : MonoBehaviour
@@ -20,6 +22,10 @@ public class Canvas : MonoBehaviour
     [Header("Button Target Pairs")]
     public List<ButtonTargetPair> buttonTargetPairs = new List<ButtonTargetPair>();
     
+    [Header("Cover Panels")]
+    public GameObject CoverSwitchButton;
+    public GameObject CoverSendButton;
+
     [Header("Debug Settings")]
     public bool showDebugInfo = true;
     
@@ -37,6 +43,9 @@ public class Canvas : MonoBehaviour
     
     [Header("Mascot Profile Control")]
     public GameObject MascotProfile;
+    
+    [Header("ChatGPT Reference")]
+    public ChatGPT chatGPT;
     
     [Header("Text Fade Settings")]
     public TMPro.TextMeshProUGUI textToFade;
@@ -96,10 +105,26 @@ public class Canvas : MonoBehaviour
                 {
                     StartCoroutine(FadeOutText());
                 }
+                
+                // Destroy all dialogue symbols when MascotProfile becomes inactive
+                SymbolManager.DestroyAllSymbols();
             }
             
             // Update the previous state
             wasMascotProfileActive = isCurrentlyActive;
+        }
+        
+        // Handle cover buttons based on isDisplayTextFinished state
+        if (chatGPT != null)
+        {
+            if (!chatGPT.isDisplayTextFinished)
+            {
+                ShowCoverButtons();
+            }
+            else
+            {
+                HideCoverButtons();
+            }
         }
     }
     
@@ -622,4 +647,16 @@ public class Canvas : MonoBehaviour
     }
     
     #endregion
+
+    public void ShowCoverButtons()
+    {
+        CoverSwitchButton.SetActive(true);
+        CoverSendButton.SetActive(true);
+    }
+
+    public void HideCoverButtons()
+    {
+        CoverSwitchButton.SetActive(false);
+        CoverSendButton.SetActive(false);
+    }
 }

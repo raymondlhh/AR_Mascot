@@ -21,8 +21,8 @@ public class ChatGPT : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private Dialogue3DText mascotDialogue;
     [SerializeField] private float interval;
-    [SerializeField] private bool isDisplayTextFinished = true;
-    [SerializeField] private bool is3DText = true;
+    [SerializeField] public bool isDisplayTextFinished = true;
+    [SerializeField] public bool is3DText = true;
     
     [Header("Mascot Profile Control")]
     [SerializeField] private GameObject MascotProfile;
@@ -44,6 +44,23 @@ public class ChatGPT : MonoBehaviour
         chatHistory += aiIdentity + "\n";
         api = new OpenAIClient(new OpenAIAuthentication(apiKey));
         button.onClick.AddListener(AskAI);
+        
+        // Initialize displayText state based on is3DText
+        if (displayText != null)
+        {
+            displayText.gameObject.SetActive(!is3DText);
+        }
+    }
+
+    public void Set3DTextMode(bool enable3D)
+    {
+        is3DText = enable3D;
+        
+        // Control displayText GameObject based on 3D text mode
+        if (displayText != null)
+        {
+            displayText.gameObject.SetActive(!enable3D);
+        }
     }
 
     private void Update()
@@ -55,6 +72,10 @@ public class ChatGPT : MonoBehaviour
             displayCoroutine = null;
             audioManager.StopVoiceover(); // Stop any playing voiceover
             isDisplayTextFinished = true; // Mark as finished when stopped
+            
+            // Re-enable button and input field when stopped
+            button.enabled = true;
+            inputField.enabled = true;
         }
         
         // Check if MascotProfile is inactive and stop displayCoroutine if it's running
@@ -64,6 +85,11 @@ public class ChatGPT : MonoBehaviour
             displayCoroutine = null;
             audioManager.StopVoiceover(); // Stop any playing voiceover
             isDisplayTextFinished = true; // Mark as finished when stopped
+            
+            // Re-enable button and input field when stopped
+            button.enabled = true;
+            inputField.enabled = true;
+            
             Debug.Log("MascotProfile is inactive - stopped displayCoroutine");
         }
     }
@@ -85,17 +111,19 @@ public class ChatGPT : MonoBehaviour
             return;
         }
 
+        // Disable button and input field immediately to prevent multiple clicks
+        button.enabled = false;
+        inputField.enabled = false;
+        isDisplayTextFinished = false; // Set to false immediately when button is clicked
+
         audioManager.PlaySFX("ButtonClick2");
         canvas.ShowTargetByName("Mascot_Idle");
+        
         // Check if mascot controller's lookOnCamera is false (no mascots active)
-        if (mascotController == null || !mascotController.lookOnCamera)
-        {
-            return;
-        }
-
-        //button.enabled = false;
-        //dropDownText.enabled = false;
-        inputField.enabled = false;
+        // if (mascotController == null || !mascotController.lookOnCamera)
+        // {
+        //     return;
+        // }
 
         userInput = dropDownText.options[dropDownText.value].text;
         chatHistory += $"{userInput}\n";
@@ -118,7 +146,6 @@ public class ChatGPT : MonoBehaviour
         
         // Split text into chunks of 18 characters or less and call MascotDialogue for each
         string fullText = result.FirstChoice.Message.Content.ToString();
-        isDisplayTextFinished = false; // Set to false when starting display
         
         // Only start DisplayTextInChunks coroutine if is3DText is true
         if (is3DText)
@@ -128,13 +155,15 @@ public class ChatGPT : MonoBehaviour
         else
         {
             // If 3D text is disabled, use regular text display with typing effect
+            // Make sure displayText is active before using it
+            if (displayText != null)
+            {
+                displayText.gameObject.SetActive(true);
+            }
             displayCoroutine = StartCoroutine(DisplayTextInChunksRegular(fullText));
         }
         
         chatHistory += $"{result.FirstChoice.Message.Content.ToString()}\n";
-
-        button.enabled = true;
-        inputField.enabled = true;
         
     }
 
@@ -151,6 +180,11 @@ public class ChatGPT : MonoBehaviour
                 Debug.Log("No mascots are active. Stopping DisplayTextInChunks.");
                 audioManager.StopVoiceover(); // Stop any playing voiceover
                 isDisplayTextFinished = true; // Mark as finished when stopped
+                
+                // Re-enable button and input field when stopped early
+                button.enabled = true;
+                inputField.enabled = true;
+                
                 yield break; // Exit the coroutine immediately
             }
 
@@ -200,6 +234,10 @@ public class ChatGPT : MonoBehaviour
         
         // Mark display text as finished
         isDisplayTextFinished = true;
+        
+        // Re-enable button and input field when text display is finished
+        button.enabled = true;
+        inputField.enabled = true;
     }
 
     private IEnumerator DisplayTextInChunksRegular(string fullText)
@@ -218,6 +256,11 @@ public class ChatGPT : MonoBehaviour
                 Debug.Log("No mascots are active. Stopping DisplayTextInChunksRegular.");
                 audioManager.StopVoiceover(); // Stop any playing voiceover
                 isDisplayTextFinished = true; // Mark as finished when stopped
+                
+                // Re-enable button and input field when stopped early
+                button.enabled = true;
+                inputField.enabled = true;
+                
                 yield break; // Exit the coroutine immediately
             }
 
@@ -251,6 +294,10 @@ public class ChatGPT : MonoBehaviour
         
         // Mark display text as finished
         isDisplayTextFinished = true;
+        
+        // Re-enable button and input field when text display is finished
+        button.enabled = true;
+        inputField.enabled = true;
     }
 
     private IEnumerator FadeOutText()
