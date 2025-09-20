@@ -482,7 +482,7 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: ar_mascot
+  mTrackableName: card
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/Image_Target.xml
   mAspectRatio: 1.5
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 498605736}
   mHiddenRoot: {fileID: 0}
-  mTargetName: ar_mascot
+  mTargetName: card
   mDatasetName: Vuforia/Image_Target.xml
   mCastedBehaviour: {fileID: 498605736}
   mMeshFilter: {fileID: 0}
