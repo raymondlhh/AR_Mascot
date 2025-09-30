@@ -60,7 +60,7 @@ MonoBehaviour:
   - audioName: EnergyDisperse
     audioFile: {fileID: 8300000, guid: 10d285b43214d5d4e8904545a4bb57f5, type: 3}
     volume: 1
-    spatialBlend: 1
+    spatialBlend: 0
     minDistance: 1
     maxDistance: 500
     rolloffMode: 0
