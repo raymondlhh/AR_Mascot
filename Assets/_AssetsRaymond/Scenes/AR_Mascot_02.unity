@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatusFilter: 1
+  StatusFilter: 0
   UsePoseSmoothing: 0
   AnimationCurve:
     serializedVersion: 2
@@ -10801,7 +10801,7 @@ PrefabInstance:
     - target: {fileID: 7069192355822181932, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.000009816772
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7069192355822181932, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
         type: 3}
@@ -10811,7 +10811,7 @@ PrefabInstance:
     - target: {fileID: 7069192355822181932, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -63
       objectReference: {fileID: 0}
     - target: {fileID: 7358378722476774982, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
         type: 3}
