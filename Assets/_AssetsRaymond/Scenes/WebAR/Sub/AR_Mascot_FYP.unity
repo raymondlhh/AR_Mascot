@@ -543,198 +543,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1847824961}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &131046278
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 131046280}
-  - component: {fileID: 131046279}
-  - component: {fileID: 131046281}
-  m_Layer: 0
-  m_Name: QnaManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &131046279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131046278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10631fa1eb112e1449b8f70781b675f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  qnaTextFile: {fileID: 4900000, guid: 832d653f537de8f47950e46a3d55ddd2, type: 3}
-  qnaPairs: []
-  enableVariations: 1
-  defaultAnswers:
-  - "\u201CI\u2019m sorry, I don\u2019t know. I am designed only for DMT Showcase
-    content.\u201D"
-  - Meet Rendify, your digital creativity companion.
-  - I'm your interactive showcase navigator.
-  - Your AI-powered exhibition assistant at your service.
-  - Welcome! I'm your virtual tour guide for today.
-  - Ready to explore amazing student projects together?
-  - Here to make your showcase journey unforgettable.
-  - Your enthusiastic guide to digital innovation.
-  - Bringing the future of learning to life.
-  - Scan, explore, and discover with me as your guide.
-  - Transforming how you experience student showcases.
-  - Making technology accessible and exciting for everyone.
-  - Your bridge between creativity and cutting-edge tech.
-  - Inspiring the next generation of digital creators.
-  - "Where imagination meets innovation \u2013 let's explore!"
-  - Unlocking the potential of immersive learning experiences.
-  - Your gateway to tomorrow's creative possibilities.
-  - 'mention:'
-  - 'mention:'
-  - 'Always mention:'
-  - "\u201CDeveloped by Technical Team: Renee Chin Wei Wen, Hoo Zhi Ling, Ling Heng
-    Hua, Goh Siew Chin, with support from Organizing Team member Joshua Lau Lik Seng.\u201D"
-  - "\u201CWhich course is the most creative?\u201D"
-  - "\u201CWhich course is the most technical?\u201D"
-  - "\u201C2D/3D Animation is creative, blending art with movement.\u201D"
-  - "\u201CBoard Game course feels creative through storytelling and design.\u201D"
-  - "\u201CGame Environment shines creatively by building immersive worlds.\u201D"
-  - "\u201C3D Modeling is creative, shaping endless digital possibilities.\u201D"
-  - "\u201CVR/AR is highly technical, requiring advanced interaction systems.\u201D"
-  - "\u201CVideo Production is technical with editing and visual effects.\u201D"
-  - "\u201CAudio Production gets technical through mixing and sound engineering.\u201D"
-  - "\u201CFYP can be technical, combining research with implementation.\u201D"
-  - FYP showcases student capstone achievements.
-  - FYP demonstrates practical problem-solving skills.
-  - FYP integrates multidisciplinary learning approaches.
-  - VR/AR creates interactive learning environments.
-  - VR/AR develops spatial computing applications.
-  - VR/AR transforms entertainment industry standards.
-  - 3D Modeling designs architectural visualization projects.
-  - 3D Modeling produces character animation assets.
-  - 3D Modeling enables rapid prototyping solutions.
-  - Video Game develops narrative storytelling mechanics.
-  - Video Game creates multiplayer gaming experiences.
-  - Video Game integrates advanced physics engines.
-  - Audio Production masters professional recording techniques.
-  - Audio Production creates cinematic soundscapes.
-  - Audio Production develops podcast broadcasting skills.
-  - Game Environment builds immersive virtual worlds.
-  - Game Environment designs atmospheric level layouts.
-  - Game Environment creates realistic terrain systems.
-  - Board Game develops strategic gameplay mechanics.
-  - Board Game creates engaging social experiences.
-  - Board Game balances competitive rule systems.
-  - 2D/3D Animation brings characters to life.
-  - 2D/3D Animation creates fluid motion sequences.
-  - 2D/3D Animation develops visual storytelling techniques.
-  - 'The Student Helpers are Bouali Douaa, Ho Hui San, Gui Shi Jun, Yu WeiJie, Lin
-    KeJun, Gan Yi Lin, Emily Lim Jia Qi, Woo Feng Yuan, Khaw Han Zhe, Lee Yi Qin,
-    Khoo Jia Hui, and Altana Flegontova. '
-  - "\u2192 Must vary, but always say Ms. Heng Yu Ping:"
-  - "\u201CThe Head of DMT is Ms. Heng Yu Ping.\u201D"
-  - "\u201CDMT is headed by Ms. Heng Yu Ping.\u201D"
-  - "\u201CMs. Heng Yu Ping leads the DMT department.\u201D"
-  - Meet Rendify, your digital creativity companion.
-  - I'm your interactive showcase navigator.
-  - Your AI-powered exhibition assistant at your service.
-  - Welcome! I'm your virtual tour guide for today.
-  - Ready to explore amazing student projects together?
-  - Here to make your showcase journey unforgettable.
-  - Your enthusiastic guide to digital innovation.
-  - Bringing the future of learning to life.
-  - Scan, explore, and discover with me as your guide.
-  - Transforming how you experience student showcases.
-  - Making technology accessible and exciting for everyone.
-  - Your bridge between creativity and cutting-edge tech.
-  - Inspiring the next generation of digital creators.
-  - "Where imagination meets innovation \u2013 let's explore!"
-  - Unlocking the potential of immersive learning experiences.
-  - Your gateway to tomorrow's creative possibilities.
-  - Realize, Digitize, Amplify
-  - 'Developed by Technical Team: Renee Chin Wei Wen, Hoo Zhi Ling, Ling Heng Hua,
-    Goh Siew Chin, with support from Organizing Team member Joshua Lau Lik Seng.'
-  - Made by DMT Students and Lecturers
-  - The showcase features 9 categories including Board Game, AVL/NLE/VFX/Audio/Animation,
-    3D Modeling, Game Environment, Video Game, Augmented Reality (AR), Mobile Application,
-    Virtual Reality (VR), and Final Year Projects.
-  - FYP showcases student capstone achievements.
-  - FYP demonstrates practical problem-solving skills.
-  - FYP integrates multidisciplinary learning approaches.
-  - VR/AR creates interactive learning environments.
-  - VR/AR develops spatial computing applications.
-  - VR/AR transforms entertainment industry standards.
-  - 3D Modeling designs architectural visualization projects.
-  - 3D Modeling produces character animation assets.
-  - 3D Modeling enables rapid prototyping solutions.
-  - Video Game develops narrative storytelling mechanics.
-  - Video Game creates multiplayer gaming experiences.
-  - Video Game integrates advanced physics engines.
-  - Audio Production masters professional recording techniques.
-  - Audio Production creates cinematic soundscapes.
-  - Audio Production develops podcast broadcasting skills.
-  - Game Environment builds immersive virtual worlds.
-  - Game Environment designs atmospheric level layouts.
-  - Game Environment creates realistic terrain systems.
-  - Board Game develops strategic gameplay mechanics.
-  - Board Game creates engaging social experiences.
-  - Board Game balances competitive rule systems.
-  - 2D/3D Animation brings characters to life.
-  - 2D/3D Animation creates fluid motion sequences.
-  - 2D/3D Animation develops visual storytelling techniques.
-  - The Student Helpers are Bouali Douaa, Ho Hui San, Gui Shi Jun, Yu WeiJie, Lin
-    KeJun, Gan Yi Lin, Emily Lim Jia Qi, Woo Feng Yuan, Khaw Han Zhe, Lee Yi Qin,
-    Khoo Jia Hui, and Altana Flegontova.
-  - The Head of DMT is Ms. Heng Yu Ping.
-  - DMT is headed by Ms. Heng Yu Ping.
-  - Ms. Heng Yu Ping leads the DMT department.
-  button: {fileID: 31681831}
-  inputField: {fileID: 0}
-  dropDownText: {fileID: 1984679835}
-  displayText: {fileID: 375706862}
-  mascotController: {fileID: 1951464209}
-  audioManager: {fileID: 2083675376}
-  canvas: {fileID: 1376905805}
-  mascotDialogue: {fileID: 0}
-  interval: 1
-  isDisplayTextFinished: 1
-  is3DText: 0
-  MascotProfile: {fileID: 100757993}
---- !u!4 &131046280
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131046278}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -152.97882, y: 259.71875, z: -0.34998798}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &131046281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131046278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f45b8da1ff2fae4e86686a0f27f2b86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sourceFilePath: e:\Downloads\AR Mascot.txt
-  targetPath: Assets/Resources/AR_Mascot.txt
 --- !u!1 &153929595
 GameObject:
   m_ObjectHideFlags: 0
@@ -12654,6 +12462,114 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2285198127378031928}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4556827149347575933
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: button
+      value: 
+      objectReference: {fileID: 31681831}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1376905805}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: inputField
+      value: 
+      objectReference: {fileID: 645172232}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: displayText
+      value: 
+      objectReference: {fileID: 375706862}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 2083675376}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: dropDownText
+      value: 
+      objectReference: {fileID: 1984679835}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: MascotProfile
+      value: 
+      objectReference: {fileID: 100757993}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: mascotController
+      value: 
+      objectReference: {fileID: 1951464209}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -152.97882
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 259.71875
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.34998798
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749565080359466631, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_Name
+      value: QnaManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9cb62df8efc2dca48981d898db3ae273, type: 3}
 --- !u!4 &4559530729353995634
 Transform:
   m_ObjectHideFlags: 0
@@ -19974,4 +19890,4 @@ SceneRoots:
   - {fileID: 1565259147}
   - {fileID: 2083675375}
   - {fileID: 1387942423}
-  - {fileID: 131046280}
+  - {fileID: 4556827149347575933}

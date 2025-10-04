@@ -2412,6 +2412,109 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &1003813725
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: button
+      value: 
+      objectReference: {fileID: 31681831}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1376905805}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: displayText
+      value: 
+      objectReference: {fileID: 375706862}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 2083675376}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: dropDownText
+      value: 
+      objectReference: {fileID: 1984679835}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: MascotProfile
+      value: 
+      objectReference: {fileID: 100757993}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: mascotController
+      value: 
+      objectReference: {fileID: 1951464209}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -152.97882
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 259.71875
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.34998798
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669604470650207793, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749565080359466631, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
+      propertyPath: m_Name
+      value: QnaManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9cb62df8efc2dca48981d898db3ae273, type: 3}
 --- !u!1 &1006652785
 GameObject:
   m_ObjectHideFlags: 0
@@ -3808,7 +3911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1387942423
 Transform:
   m_ObjectHideFlags: 0
@@ -20178,3 +20281,4 @@ SceneRoots:
   - {fileID: 1565259147}
   - {fileID: 2083675375}
   - {fileID: 1387942423}
+  - {fileID: 1003813725}
