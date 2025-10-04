@@ -543,6 +543,66 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1847824961}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &131046278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 131046280}
+  - component: {fileID: 131046279}
+  m_Layer: 0
+  m_Name: QnaManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &131046279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131046278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10631fa1eb112e1449b8f70781b675f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qnaTextFile: {fileID: 4900000, guid: 832d653f537de8f47950e46a3d55ddd2, type: 3}
+  qnaPairs: []
+  enableVariations: 1
+  defaultAnswers: []
+  button: {fileID: 31681831}
+  inputField: {fileID: 0}
+  dropDownText: {fileID: 1984679835}
+  displayText: {fileID: 375706862}
+  mascotController: {fileID: 1951464209}
+  audioManager: {fileID: 2083675376}
+  canvas: {fileID: 1376905805}
+  mascotDialogue: {fileID: 0}
+  interval: 1
+  isDisplayTextFinished: 1
+  is3DText: 0
+  MascotProfile: {fileID: 100757993}
+--- !u!4 &131046280
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131046278}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -152.97882, y: 259.71875, z: -0.34998798}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &153929595
 GameObject:
   m_ObjectHideFlags: 0
@@ -3483,7 +3543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1387942423
 Transform:
   m_ObjectHideFlags: 0
@@ -3594,13 +3654,15 @@ MonoBehaviour:
     Lin Yihan, Ellena Gazali, Ong Yen Xin, Hoo Min Hui, Wang Xizhen, Tan Yi Heng 
     Photography & Videography Team  Leader: Tan Hao  Members: Wilson Wong, Wu Qianyi 
     Technical Team  Leader: Renee Chin Wei Wen  Members: Hoo Zhi Ling, Ling Heng
-    Hua, Goh Siew Chin   \U0001F539 Other Key Questions Who are the Student Helpers? 
-    \u2192 Must vary, but always say none exist:  \u201CThere are no Student Helpers
-    for this showcase.\u201D  \u201CThis showcase does not include Student Helpers.\u201D 
-    \u201CCurrently, no Student Helpers are involved here.\u201D  Who is the Head
-    of DMT?  \u2192 Must vary, but always say Ms. Heng Yu Ping:  \u201CThe Head of
-    DMT is Ms. Heng Yu Ping.\u201D  \u201CDMT is headed by Ms. Heng Yu Ping.\u201D 
-    \u201CMs. Heng Yu Ping leads the DMT department.\u201D   t.\u201D  "
+    Hua, Goh Siew Chin   \U0001F539 Other Key Questions Who are the Student Helpers?
+    Always include all names exactly as listed. This answer has no word limit (unlike
+    Q1\u2013Q20). Keep Rendify\u2019s polite, playful, and futuristic tone.  \"The
+    Student Helpers are Bouali Douaa, Ho Hui San, Gui Shi Jun, Yu WeiJie, Lin KeJun,
+    Gan Yi Lin, Emily Lim Jia Qi, Woo Feng Yuan, Khaw Han Zhe, Lee Yi Qin, Khoo Jia
+    Hui, and Altana Flegontova. \"  Who is the Head of DMT?  \u2192 Must vary, but
+    always say Ms. Heng Yu Ping:  \u201CThe Head of DMT is Ms. Heng Yu Ping.\u201D 
+    \u201CDMT is headed by Ms. Heng Yu Ping.\u201D  \u201CMs. Heng Yu Ping leads
+    the DMT department.\u201D    t.\u201D  "
   mascotController: {fileID: 1951464209}
   audioManager: {fileID: 2083675376}
   canvas: {fileID: 1376905805}
@@ -3896,7 +3958,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1565259147}
   - component: {fileID: 1565259146}
-  - component: {fileID: 1565259145}
+  - component: {fileID: 1565259148}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -3904,26 +3966,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1565259145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565259144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &1565259146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3954,6 +3996,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1565259148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565259144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!1 &1645242075
 GameObject:
   m_ObjectHideFlags: 0
@@ -19758,3 +19842,4 @@ SceneRoots:
   - {fileID: 1565259147}
   - {fileID: 2083675375}
   - {fileID: 1387942423}
+  - {fileID: 131046280}
