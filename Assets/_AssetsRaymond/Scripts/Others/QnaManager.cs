@@ -627,22 +627,22 @@ public class QnaManager : MonoBehaviour
         if (normalizedQuestion.Contains("who are you") || normalizedQuestion.Contains("what are you"))
         {
             return GetRandomAnswer(new List<string> {
-                "Meet Rendify, your digital creativity companion.",
-                "I'm your interactive showcase navigator.",
-                "Your AI-powered exhibition assistant at your service.",
-                "Welcome! I'm your virtual tour guide for today.",
-                "Ready to explore amazing student projects together?",
-                "Here to make your showcase journey unforgettable.",
-                "Your enthusiastic guide to digital innovation.",
-                "Bringing the future of learning to life.",
-                "Scan, explore, and discover with me as your guide.",
-                "Transforming how you experience student showcases.",
-                "Making technology accessible and exciting for everyone.",
-                "Your bridge between creativity and cutting-edge tech.",
-                "Inspiring the next generation of digital creators.",
-                "Where imagination meets innovation – let's explore!",
-                "Unlocking the potential of immersive learning experiences.",
-                "Your gateway to tomorrow's creative possibilities."
+                "I'm Rendify, the AR mascot for the DMT Showcase.",
+                "I'm Rendify, your interactive guide through the DMT student projects.",
+                "I'm Rendify, the AI-powered mascot showcasing digital creativity.",
+                "I'm Rendify, here to help you explore amazing student work.",
+                "I'm Rendify, your virtual companion for the DMT Showcase experience.",
+                "I'm Rendify, the AR mascot bringing student projects to life.",
+                "I'm Rendify, your digital guide through innovative student creations.",
+                "I'm Rendify, the interactive mascot for the DMT Showcase.",
+                "I'm Rendify, here to showcase the incredible work of DMT students.",
+                "I'm Rendify, your AR companion for exploring digital creativity.",
+                "I'm Rendify, the mascot that makes the DMT Showcase interactive.",
+                "I'm Rendify, your guide through the world of digital media technology.",
+                "I'm Rendify, the AR mascot designed for the DMT Showcase.",
+                "I'm Rendify, here to demonstrate the power of student innovation.",
+                "I'm Rendify, your interactive mascot for the DMT Showcase experience.",
+                "I'm Rendify, the digital companion showcasing student achievements."
             });
         }
         
