@@ -420,6 +420,11 @@ PrefabInstance:
       objectReference: {fileID: 1951464204}
     - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
         type: 3}
+      propertyPath: mascotDialogue
+      value: 
+      objectReference: {fileID: 75450672}
+    - target: {fileID: 6230685575626330883, guid: 9cb62df8efc2dca48981d898db3ae273,
+        type: 3}
       propertyPath: mascotController
       value: 
       objectReference: {fileID: 1951464209}
@@ -509,7 +514,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498605733}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
   m_Name: 
@@ -577,7 +582,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498605733}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1631628248, guid: 8a9a760f95896c34689febc965510927, type: 3}
   m_Name: 
@@ -585,9 +590,9 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: card
+  mTrackableName: ARMascot
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/Image_Target.xml
+  mDataSetPath: Vuforia/ARMascot-ImageTargets.xml
   mAspectRatio: 1.5
   mImageTargetType: 0
   mWidth: 1
@@ -627,8 +632,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 498605736}
   mHiddenRoot: {fileID: 0}
-  mTargetName: card
-  mDatasetName: Vuforia/Image_Target.xml
+  mTargetName: ARMascot
+  mDatasetName: Vuforia/ARMascot-ImageTargets.xml
   mCastedBehaviour: {fileID: 498605736}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}
@@ -10851,6 +10856,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6661022868338649124, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6700782931763208579, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -10873,8 +10883,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7042756847537340130, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 189.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 7042756847537340130, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 153.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 7042756847537340130, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
+        type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6
+      value: -1.91
       objectReference: {fileID: 0}
     - target: {fileID: 7042756847537340130, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
         type: 3}
@@ -10884,7 +10904,7 @@ PrefabInstance:
     - target: {fileID: 7042756847537340130, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 431
+      value: 392.12
       objectReference: {fileID: 0}
     - target: {fileID: 7069192355822181932, guid: 4c296e678763e4f4a9fc3174dd0f83cf,
         type: 3}
