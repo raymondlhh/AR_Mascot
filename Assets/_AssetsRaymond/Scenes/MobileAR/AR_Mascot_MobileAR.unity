@@ -590,13 +590,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: ARMascot
+  mTrackableName: ARMascot3
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/ARMascot-ImageTargets.xml
-  mAspectRatio: 1.5
+  mAspectRatio: 0.906699
   mImageTargetType: 0
   mWidth: 1
-  mHeight: 1.5
+  mHeight: 0.906699
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 498605736}
   mHiddenRoot: {fileID: 0}
-  mTargetName: ARMascot
+  mTargetName: ARMascot3
   mDatasetName: Vuforia/ARMascot-ImageTargets.xml
   mCastedBehaviour: {fileID: 498605736}
   mMeshFilter: {fileID: 0}
